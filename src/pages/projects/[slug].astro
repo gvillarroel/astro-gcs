@@ -1,34 +1,27 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { repos } from '../../data/repos';
-import { fetchReadmeMarkdown, renderReadmeHtml } from '../../lib/github-readme';
+import { buildRepoTags, fetchPublicRepos, formatDate } from '../../lib/github';
 
 export async function getStaticPaths() {
-	const paths = await Promise.all(
-		repos.map(async (repo) => {
-			const markdown = await fetchReadmeMarkdown(repo);
-			const readmeHtml = markdown ? renderReadmeHtml(markdown, repo) : null;
-
-			return {
-				params: { slug: repo.slug },
-				props: {
-					repo,
-					readmeHtml,
-					hasReadme: Boolean(markdown),
-				},
-			};
-		}),
-	);
+	const repos = await fetchPublicRepos();
+	const paths = repos.map((repo) => ({
+		params: { slug: repo.slug },
+		props: {
+			repo,
+			repos,
+		},
+	}));
 
 	return paths;
 }
 
-const { repo, readmeHtml, hasReadme } = Astro.props;
+const { repo, repos } = Astro.props;
+const tags = buildRepoTags(repo);
 ---
 
 <Layout
 	title={`${repo.name} | gvillarroel Public Projects`}
-	description={repo.summary}
+	description={repo.description}
 >
 	<div class="page-shell">
 		<header class="site-header">
@@ -52,7 +45,7 @@ const { repo, readmeHtml, hasReadme } = Astro.props;
 							<li>
 								<a href={`${entry.slug}.html`} data-active={entry.slug === repo.slug ? 'true' : 'false'}>
 									<span class="repo-name">{entry.name}</span>
-									<span class="repo-meta">{entry.summary}</span>
+									<span class="repo-meta">{entry.description}</span>
 								</a>
 							</li>
 						))
@@ -61,11 +54,11 @@ const { repo, readmeHtml, hasReadme } = Astro.props;
 			</aside>
 
 			<main class="panel">
-				<div class="kicker">Project Documentation</div>
+				<div class="kicker">Repository Snapshot</div>
 				<h1 style="margin: 0 0 0.8rem;">{repo.name}</h1>
-				<p class="lead">{repo.summary}</p>
+				<p class="lead">{repo.description}</p>
 				<div class="tag-list">
-					{repo.tags.map((tag) => (
+					{tags.map((tag) => (
 						<span class="tag">{tag}</span>
 					))}
 				</div>
@@ -79,22 +72,55 @@ const { repo, readmeHtml, hasReadme } = Astro.props;
 						<span>{repo.defaultBranch}</span>
 					</div>
 					<div class="stat">
-						<strong>README source</strong>
-						<span>{hasReadme ? 'Imported at build time' : 'No README.md found'}</span>
+						<strong>Language</strong>
+						<span>{repo.language ?? 'Not detected'}</span>
+					</div>
+					<div class="stat">
+						<strong>Updated</strong>
+						<span>{formatDate(repo.updatedAt)}</span>
+					</div>
+					<div class="stat">
+						<strong>Created</strong>
+						<span>{formatDate(repo.createdAt)}</span>
+					</div>
+					<div class="stat">
+						<strong>Stars</strong>
+						<span>{repo.stars}</span>
+					</div>
+					<div class="stat">
+						<strong>Open issues</strong>
+						<span>{repo.openIssues}</span>
 					</div>
 				</div>
 
 				<section class="docs" style="margin-top: 2rem;">
-					{
-						hasReadme ? (
-							<Fragment set:html={readmeHtml} />
-						) : (
-							<div class="empty-state">
-								No <code>README.md</code> was available on the repository default branch at build
-								time. The repository is still listed here so the navigation stays complete.
-							</div>
-						)
-					}
+					<div class="card-grid">
+						<article class="card">
+							<strong>Repository URL</strong>
+							<p><a href={repo.repoUrl}>{repo.repoUrl}</a></p>
+						</article>
+						<article class="card">
+							<strong>Default branch</strong>
+							<p><code>{repo.defaultBranch}</code></p>
+						</article>
+						<article class="card">
+							<strong>Homepage</strong>
+							<p>{repo.homepage ? <a href={repo.homepage}>{repo.homepage}</a> : 'No homepage set'}</p>
+						</article>
+						<article class="card">
+							<strong>Repository type</strong>
+							<p>
+								{repo.archived ? 'Archived' : 'Active'}
+								{repo.fork ? ' fork' : ' source repository'}
+							</p>
+						</article>
+					</div>
+
+					<div class="empty-state" style="margin-top: 1.4rem;">
+						This page is generated entirely from GitHub repository metadata during the Astro build.
+						No external README markup is copied into the static output, which keeps all project pages
+						visually consistent.
+					</div>
 				</section>
 			</main>
 		</div>

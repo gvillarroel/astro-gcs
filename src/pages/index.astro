@@ -1,6 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { featuredRepos, repos } from '../data/repos';
+import { buildRepoTags, fetchPublicRepos, formatDate } from '../lib/github';
+
+const repos = await fetchPublicRepos();
+const featuredRepos = repos.slice(0, 10);
 
 const now = new Intl.DateTimeFormat('en-US', {
 	dateStyle: 'long',
@@ -32,7 +35,7 @@ const now = new Intl.DateTimeFormat('en-US', {
 							<li>
 								<a href={`projects/${repo.slug}.html`}>
 									<span class="repo-name">{repo.name}</span>
-									<span class="repo-meta">{repo.summary}</span>
+									<span class="repo-meta">{repo.description}</span>
 								</a>
 							</li>
 						))
@@ -41,12 +44,12 @@ const now = new Intl.DateTimeFormat('en-US', {
 			</aside>
 
 			<main class="panel">
-				<div class="kicker">Static Documentation Hub</div>
-				<h1 class="hero-title">Public project docs with bucket-safe navigation.</h1>
+				<div class="kicker">Astro Build-Time GitHub Index</div>
+				<h1 class="hero-title">Uniform project pages generated from GitHub metadata.</h1>
 				<p class="lead">
-					This site indexes public repositories under <code>gvillarroel</code>, adds a usable
-					navigation layer, and turns reviewed README content into static pages that can be uploaded
-					directly to Google Cloud Storage.
+					This site iterates the public repositories under <code>gvillarroel</code> during the Astro
+					build, generates one static page per repository, and renders everything with the same local
+					template instead of embedding external README markup.
 				</p>
 				<div class="stats">
 					<div class="stat">
@@ -58,8 +61,8 @@ const now = new Intl.DateTimeFormat('en-US', {
 						<span>Astro static build on GCS</span>
 					</div>
 					<div class="stat">
-						<strong>Navigation</strong>
-						<span>Relative links for object URL browsing</span>
+						<strong>Source model</strong>
+						<span>GitHub API metadata at build time</span>
 					</div>
 					<div class="stat">
 						<strong>Built</strong>
@@ -78,9 +81,10 @@ const now = new Intl.DateTimeFormat('en-US', {
 							featuredRepos.map((repo) => (
 								<article class="card">
 									<strong>{repo.name}</strong>
-									<p>{repo.summary}</p>
+									<p>{repo.description}</p>
+									<p class="repo-meta">Updated {formatDate(repo.updatedAt)}</p>
 									<div class="tag-list">
-										{repo.tags.map((tag) => (
+										{buildRepoTags(repo).map((tag) => (
 											<span class="tag">{tag}</span>
 										))}
 									</div>
