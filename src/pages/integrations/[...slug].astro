@@ -1,0 +1,91 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import {
+	integrationLabel,
+	integrationPath,
+	integrationSectionLabel,
+	loadIntegrationEntries,
+} from '../../lib/integrations';
+
+export async function getStaticPaths() {
+	const entries = await loadIntegrationEntries();
+
+	return entries.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry, entries },
+	}));
+}
+
+const { entry, entries: allEntries } = Astro.props;
+const Content = entry.Content;
+const headings = [];
+---
+
+<Layout title={`${entry.data.title} | Integration Examples`} description={entry.data.summary ?? entry.data.title}>
+	<div class="page-shell">
+		<header class="site-header">
+			<div>
+				<a class="site-title" href="/integrations/index.html">integration / docs</a>
+				<div class="site-tagline">{integrationSectionLabel(entry.data.section)} / {integrationLabel(entry.data.integration)}</div>
+			</div>
+			<div class="cta-row">
+				<a class="button-link" href="/integrations/index.html">Integration hub</a>
+				<a class="button-link" href="/index.html">Project index</a>
+				{entry.data.sourceUrl ? <a class="button-link" href={entry.data.sourceUrl}>Open source</a> : null}
+			</div>
+		</header>
+
+		<div class="grid-shell">
+			<aside class="sidebar">
+				<div class="kicker">Integration Nav</div>
+				<strong>Pages</strong>
+				<ul class="repo-list">
+					{
+						allEntries.map((item) => (
+							<li>
+								<a href={integrationPath(item)} data-active={item.id === entry.id ? 'true' : 'false'}>
+									<span class="repo-name">{item.data.title}</span>
+									<span class="repo-meta">{item.data.summary}</span>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</aside>
+
+			<main class="panel">
+				<div class="kicker">{integrationSectionLabel(entry.data.section)}</div>
+				<h1 style="margin: 0 0 0.8rem;">{entry.data.title}</h1>
+				<p class="lead">{entry.data.summary}</p>
+				<div class="tag-list">
+					<span class="tag">{integrationLabel(entry.data.integration)}</span>
+					{entry.data.sourceLabel ? <span class="tag">{entry.data.sourceLabel}</span> : null}
+					{entry.data.generatedAt ? <span class="tag">generated</span> : null}
+				</div>
+
+				<div class="stats">
+					<div class="stat">
+						<strong>Section</strong>
+						<span>{integrationSectionLabel(entry.data.section)}</span>
+					</div>
+					<div class="stat">
+						<strong>Integration</strong>
+						<span>{integrationLabel(entry.data.integration)}</span>
+					</div>
+					<div class="stat">
+						<strong>Path</strong>
+						<span>{entry.id}</span>
+					</div>
+					<div class="stat">
+						<strong>Headings</strong>
+						<span>{headings.length}</span>
+					</div>
+				</div>
+
+				<section class="docs docs-markdown">
+					<Content />
+				</section>
+			</main>
+		</div>
+	</div>
+</Layout>

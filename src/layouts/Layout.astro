@@ -35,5 +35,42 @@ const backgroundVars = `--bg-image-1: url(${bg1.src}); --bg-image-2: url(${bg2.s
 		<div class="site-layer">
 			<slot />
 		</div>
+		<script>
+			import mermaid from 'mermaid';
+
+			function upgradeMermaidBlocks() {
+				const blocks = document.querySelectorAll('pre code.language-mermaid');
+				if (!blocks.length) {
+					return;
+				}
+
+				for (const block of blocks) {
+					const pre = block.closest('pre');
+					if (!pre) {
+						continue;
+					}
+
+					const container = document.createElement('div');
+					container.className = 'mermaid';
+					container.textContent = block.textContent ?? '';
+					pre.replaceWith(container);
+				}
+
+				mermaid.initialize({
+					startOnLoad: false,
+					theme: 'dark',
+					securityLevel: 'loose',
+				});
+				mermaid.run({
+					querySelector: '.mermaid',
+				});
+			}
+
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', upgradeMermaidBlocks, { once: true });
+			} else {
+				upgradeMermaidBlocks();
+			}
+		</script>
 	</body>
 </html>

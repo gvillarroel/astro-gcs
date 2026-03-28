@@ -229,6 +229,14 @@ pre {
 	word-break: break-word;
 }
 
+.nav-label {
+	margin-top: 0.75rem;
+	font-size: 0.72rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--accent-2);
+}
+
 .kicker {
 	display: inline-block;
 	font-size: 0.74rem;
@@ -377,10 +385,62 @@ pre {
 	color: #c5ffe9;
 }
 
+.docs blockquote {
+	margin: 1.25rem 0;
+	padding: 0.85rem 1rem;
+	border-left: 3px solid var(--accent);
+	background: rgba(7, 14, 17, 0.72);
+	color: #d5ebdf;
+}
+
+.docs table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.2rem 0;
+}
+
+.docs th,
+.docs td {
+	padding: 0.7rem 0.8rem;
+	border: 1px solid rgba(123, 247, 199, 0.16);
+	text-align: left;
+	vertical-align: top;
+}
+
+.docs th {
+	color: var(--accent);
+	background: rgba(7, 14, 17, 0.82);
+}
+
+.docs ul,
+.docs ol {
+	padding-left: 1.25rem;
+}
+
 .docs pre code {
 	background: transparent;
 	padding: 0;
 	color: #d4e6ec;
+}
+
+.docs-markdown {
+	margin-top: 2rem;
+}
+
+.docs .mermaid {
+	margin: 1.5rem 0;
+	padding: 1rem;
+	border: 1px solid var(--line);
+	background: rgba(4, 9, 11, 0.94);
+	overflow-x: auto;
+}
+
+.integration-section {
+	margin-top: 2rem;
+}
+
+.section-heading h2 {
+	margin: 0;
 }
 
 .empty-state {

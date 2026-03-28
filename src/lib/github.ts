@@ -1,3 +1,5 @@
+import repoSnapshot from '../data/repo-snapshot.json';
+
 export type PublicRepo = {
 	name: string;
 	slug: string;
@@ -67,7 +69,8 @@ export const fetchPublicRepos = async () => {
 	);
 
 	if (!response.ok) {
-		throw new Error(`GitHub repo fetch failed with status ${response.status}`);
+		console.warn(`GitHub repo fetch failed with status ${response.status}. Using local snapshot fallback.`);
+		return [...repoSnapshot] as PublicRepo[];
 	}
 
 	const repos = (await response.json()) as Array<{

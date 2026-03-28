@@ -1,0 +1,113 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import {
+	integrationLabel,
+	integrationPath,
+	integrationSectionLabel,
+	loadIntegrationEntries,
+} from '../../lib/integrations';
+
+const entries = await loadIntegrationEntries();
+const groups = (['local', 'remote', 'knowledge'] as const).map((section) => ({
+	section,
+	label: integrationSectionLabel(section),
+	entries: entries.filter((entry) => entry.data.section === section),
+}));
+---
+
+<Layout
+	title="Integration Examples | gvillarroel Static Docs"
+	description="Examples of local Markdown, remote Markdown, and knowledge-backed content rendered by Astro into static HTML."
+>
+	<div class="page-shell">
+		<header class="site-header">
+			<div>
+				<a class="site-title" href="/index.html">gvillarroel / static docs</a>
+				<div class="site-tagline">Astro examples for nested Markdown, Mermaid, remote content, and knowledge sources.</div>
+			</div>
+			<div class="cta-row">
+				<a class="button-link" href="/index.html">Project index</a>
+				<a class="button-link" href="https://github.com/gvillarroel/astro-gcs">Site source</a>
+			</div>
+		</header>
+
+		<div class="grid-shell">
+			<aside class="sidebar">
+				<div class="kicker">Integration Nav</div>
+				<strong>Examples</strong>
+				<ul class="repo-list">
+					{
+						groups.map((group) => (
+							<>
+								<li class="nav-label">{group.label}</li>
+								{group.entries.map((entry) => (
+									<li>
+										<a href={integrationPath(entry)}>
+											<span class="repo-name">{entry.data.title}</span>
+											<span class="repo-meta">{entry.data.summary}</span>
+										</a>
+									</li>
+								))}
+							</>
+						))
+					}
+				</ul>
+			</aside>
+
+			<main class="panel">
+				<div class="kicker">Astro Integration Examples</div>
+				<h1 class="hero-title">Static docs fed by multiple source types.</h1>
+				<p class="lead">
+					This section shows one shared Astro rendering pipeline for local Markdown, remote GitHub
+					Markdown, and cached knowledge content synced from Confluence, Jira, and Aha.
+				</p>
+
+				<div class="stats">
+					<div class="stat">
+						<strong>Total pages</strong>
+						<span>{entries.length} integration pages</span>
+					</div>
+					<div class="stat">
+						<strong>Local examples</strong>
+						<span>{groups.find((group) => group.section === 'local')?.entries.length ?? 0}</span>
+					</div>
+					<div class="stat">
+						<strong>Remote examples</strong>
+						<span>{groups.find((group) => group.section === 'remote')?.entries.length ?? 0}</span>
+					</div>
+					<div class="stat">
+						<strong>Knowledge examples</strong>
+						<span>{groups.find((group) => group.section === 'knowledge')?.entries.length ?? 0}</span>
+					</div>
+				</div>
+
+				{
+					groups.map((group) => (
+						<section class="integration-section">
+							<div class="section-heading">
+								<div class="kicker">{group.label}</div>
+								<h2>{group.label}</h2>
+							</div>
+							<div class="card-grid">
+								{group.entries.map((entry) => (
+									<article class="card">
+										<strong>{entry.data.title}</strong>
+										<p>{entry.data.summary}</p>
+										<div class="tag-list">
+											<span class="tag">{integrationLabel(entry.data.integration)}</span>
+											{entry.data.sourceLabel ? <span class="tag">{entry.data.sourceLabel}</span> : null}
+										</div>
+										<div class="cta-row">
+											<a class="button-link" href={integrationPath(entry)}>Open page</a>
+											{entry.data.sourceUrl ? <a class="button-link" href={entry.data.sourceUrl}>Source</a> : null}
+										</div>
+									</article>
+								))}
+							</div>
+						</section>
+					))
+				}
+			</main>
+		</div>
+	</div>
+</Layout>

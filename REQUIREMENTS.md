@@ -29,9 +29,11 @@ Result:
 - Set `output: 'static'` in `astro.config.mjs`.
 - Added `npm run check`.
 - Added `npm run deploy:gcs`.
+- Added `npm run generate:integrations`.
 - Added `src/pages/404.astro`.
 - Added `scripts/deploy-gcs.ps1` to build and sync `dist/` to a bucket.
-- Updated the homepage content to identify the deployment target and stack version.
+- Added a static integrations section generated from local Markdown, remote Markdown, and cached `.knowledge` sources.
+- Updated the homepage content to identify the deployment target, repository index, and integrations section.
 - Changed the deploy script invocation to use `powershell -NoProfile` because the user PowerShell profile produced PSReadLine errors in non-interactive execution.
 
 ## Google Cloud bucket setup that worked
