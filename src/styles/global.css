@@ -216,6 +216,8 @@ pre {
 	font-size: 0.96rem;
 	margin-bottom: 0.25rem;
 	text-transform: lowercase;
+	overflow-wrap: anywhere;
+	word-break: break-word;
 }
 
 .repo-meta {
@@ -223,6 +225,8 @@ pre {
 	color: var(--muted);
 	font-size: 0.87rem;
 	line-height: 1.45;
+	overflow-wrap: anywhere;
+	word-break: break-word;
 }
 
 .kicker {
@@ -257,12 +261,12 @@ pre {
 }
 
 .stats {
-	grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 	margin-top: 1.3rem;
 }
 
 .card-grid {
-	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 	margin-top: 1.4rem;
 }
 
@@ -272,6 +276,7 @@ pre {
 	border: 1px solid var(--line);
 	padding: 0.9rem;
 	backdrop-filter: blur(8px);
+	min-width: 0;
 }
 
 .stat strong,
@@ -282,6 +287,17 @@ pre {
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
 	color: var(--accent);
+	overflow-wrap: anywhere;
+	word-break: break-word;
+}
+
+.stat span,
+.card p,
+.card a,
+.stat a,
+.site-tagline {
+	overflow-wrap: anywhere;
+	word-break: break-word;
 }
 
 .tag-list {
