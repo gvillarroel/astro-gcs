@@ -67,23 +67,40 @@ Result:
 - `astro build` succeeded repeatedly.
 - The bucket upload completed successfully.
 
+## Local preview that worked
+
+Verified with:
+
+```powershell
+cd $HOME\dev\astro-gcs-smoke
+npm run build
+npm run preview -- --host 127.0.0.1 --port 4322
+```
+
+Observed behavior:
+
+- `http://127.0.0.1:4322/` returned the rendered Astro homepage.
+- This local preview matched the expected static site behavior better than the bucket root URL.
+- This is the quickest way to confirm the final HTML output before uploading to GCS.
+
 ## Runtime verification that worked
 
 Verified with `Invoke-WebRequest`:
 
 ```powershell
-Invoke-WebRequest -Uri "http://astro-gcs-smoke-attguesser-646093577709.storage.googleapis.com/" -UseBasicParsing
+Invoke-WebRequest -Uri "http://astro-gcs-smoke-attguesser-646093577709.storage.googleapis.com/index.html" -UseBasicParsing
 Invoke-WebRequest -Uri "http://astro-gcs-smoke-attguesser-646093577709.storage.googleapis.com/missing" -UseBasicParsing
 ```
 
 Observed behavior:
 
-- `/` returned HTTP `200`.
+- `/index.html` returned HTTP `200` with the Astro HTML document.
 - `/missing` returned HTTP `404`.
+- `/` returned HTTP `200` with an XML `ListBucketResult`, so it is not the right URL to verify the rendered site.
 
-Working website endpoint:
+Working public page URL:
 
-- `http://astro-gcs-smoke-attguesser-646093577709.storage.googleapis.com/`
+- `http://astro-gcs-smoke-attguesser-646093577709.storage.googleapis.com/index.html`
 
 ## Google Cloud repository status
 
