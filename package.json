@@ -9,9 +9,15 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check": "astro check",
+    "deploy:gcs": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/deploy-gcs.ps1"
   },
   "dependencies": {
     "astro": "^6.1.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.8",
+    "typescript": "^5.9.3"
   }
 }
