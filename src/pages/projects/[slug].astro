@@ -1,0 +1,102 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { repos } from '../../data/repos';
+import { fetchReadmeMarkdown, renderReadmeHtml } from '../../lib/github-readme';
+
+export async function getStaticPaths() {
+	const paths = await Promise.all(
+		repos.map(async (repo) => {
+			const markdown = await fetchReadmeMarkdown(repo);
+			const readmeHtml = markdown ? renderReadmeHtml(markdown, repo) : null;
+
+			return {
+				params: { slug: repo.slug },
+				props: {
+					repo,
+					readmeHtml,
+					hasReadme: Boolean(markdown),
+				},
+			};
+		}),
+	);
+
+	return paths;
+}
+
+const { repo, readmeHtml, hasReadme } = Astro.props;
+---
+
+<Layout
+	title={`${repo.name} | gvillarroel Public Projects`}
+	description={repo.summary}
+>
+	<div class="page-shell">
+		<header class="site-header">
+			<div>
+				<a class="site-title" href="../index.html">gvillarroel / static docs</a>
+				<div class="site-tagline">{repo.fullName}</div>
+			</div>
+			<div class="cta-row">
+				<a class="button-link" href="../index.html">Back to index</a>
+				<a class="button-link" href={repo.repoUrl}>Open on GitHub</a>
+			</div>
+		</header>
+
+		<div class="grid-shell">
+			<aside class="sidebar">
+				<div class="kicker">Repository Nav</div>
+				<strong>Projects</strong>
+				<ul class="repo-list">
+					{
+						repos.map((entry) => (
+							<li>
+								<a href={`${entry.slug}.html`} data-active={entry.slug === repo.slug ? 'true' : 'false'}>
+									<span class="repo-name">{entry.name}</span>
+									<span class="repo-meta">{entry.summary}</span>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</aside>
+
+			<main class="panel">
+				<div class="kicker">Project Documentation</div>
+				<h1 style="margin: 0 0 0.8rem;">{repo.name}</h1>
+				<p class="lead">{repo.summary}</p>
+				<div class="tag-list">
+					{repo.tags.map((tag) => (
+						<span class="tag">{tag}</span>
+					))}
+				</div>
+				<div class="stats">
+					<div class="stat">
+						<strong>Repository</strong>
+						<span>{repo.fullName}</span>
+					</div>
+					<div class="stat">
+						<strong>Default branch</strong>
+						<span>{repo.defaultBranch}</span>
+					</div>
+					<div class="stat">
+						<strong>README source</strong>
+						<span>{hasReadme ? 'Imported at build time' : 'No README.md found'}</span>
+					</div>
+				</div>
+
+				<section class="docs" style="margin-top: 2rem;">
+					{
+						hasReadme ? (
+							<Fragment set:html={readmeHtml} />
+						) : (
+							<div class="empty-state">
+								No <code>README.md</code> was available on the repository default branch at build
+								time. The repository is still listed here so the navigation stays complete.
+							</div>
+						)
+					}
+				</section>
+			</main>
+		</div>
+	</div>
+</Layout>

@@ -14,7 +14,8 @@
     "deploy:gcs": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/deploy-gcs.ps1"
   },
   "dependencies": {
-    "astro": "^6.1.1"
+    "astro": "^6.1.1",
+    "marked": "^17.0.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.8",

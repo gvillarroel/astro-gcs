@@ -1,6 +1,6 @@
-# Astro GCS Smoke
+# Astro GCS
 
-Minimal Astro 6.1.1 project deployed as static files to Google Cloud Storage.
+Static Astro documentation hub for public `gvillarroel` repositories, deployed as plain files to Google Cloud Storage.
 
 ## Local commands
 
@@ -18,6 +18,12 @@ npm run deploy:gcs
 - Use `npm run preview` after `npm run build` to serve the generated `dist/` output locally.
 - The local preview serves the site as it should appear when `/` resolves to `index.html`.
 - This is useful because the bucket root URL does not render the homepage for this bucket name.
+
+## What the site does
+
+- Builds a static index of public `gvillarroel` repositories.
+- Generates per-project HTML pages with README content baked into the build output.
+- Uses relative navigation so pages remain browsable from explicit object URLs such as `index.html` and `projects/*.html`.
 
 ## Hosting target
 

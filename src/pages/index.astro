@@ -1,4 +1,7 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import { featuredRepos, repos } from '../data/repos';
+
 const now = new Intl.DateTimeFormat('en-US', {
 	dateStyle: 'long',
 	timeStyle: 'short',
@@ -6,144 +9,91 @@ const now = new Intl.DateTimeFormat('en-US', {
 }).format(new Date());
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Astro on Google Cloud Storage</title>
-		<meta
-			name="description"
-			content="Smoke test for deploying an Astro 6.1 static site to Google Cloud Storage."
-		/>
-		<style>
-			:root {
-				color-scheme: light;
-				--bg: #f6efe4;
-				--panel: rgba(255, 255, 255, 0.82);
-				--ink: #1d2a36;
-				--accent: #d95f02;
-				--accent-2: #3b7a57;
-				--border: rgba(29, 42, 54, 0.12);
-			}
+<Layout
+	title="gvillarroel Public Projects"
+	description="Static documentation hub for public gvillarroel repositories, generated with Astro and deployed to Google Cloud Storage."
+>
+	<div class="page-shell">
+		<header class="site-header">
+			<div>
+				<div class="site-title">gvillarroel / static docs</div>
+				<div class="site-tagline">Public repository documentation baked into static HTML for bucket hosting.</div>
+			</div>
+			<a class="button-link" href="https://github.com/gvillarroel">GitHub profile</a>
+		</header>
 
-			* {
-				box-sizing: border-box;
-			}
+		<div class="grid-shell">
+			<aside class="sidebar">
+				<div class="kicker">Repository Nav</div>
+				<strong>Public projects</strong>
+				<ul class="repo-list">
+					{
+						repos.map((repo) => (
+							<li>
+								<a href={`projects/${repo.slug}.html`}>
+									<span class="repo-name">{repo.name}</span>
+									<span class="repo-meta">{repo.summary}</span>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</aside>
 
-			body {
-				margin: 0;
-				font-family: Georgia, "Times New Roman", serif;
-				color: var(--ink);
-				background:
-					radial-gradient(circle at top, rgba(217, 95, 2, 0.16), transparent 35%),
-					radial-gradient(circle at 80% 20%, rgba(59, 122, 87, 0.2), transparent 28%),
-					linear-gradient(180deg, #fcf7ef 0%, var(--bg) 100%);
-				min-height: 100vh;
-			}
-
-			main {
-				width: min(960px, calc(100% - 2rem));
-				margin: 0 auto;
-				padding: 4rem 0 5rem;
-			}
-
-			.hero {
-				background: var(--panel);
-				backdrop-filter: blur(12px);
-				border: 1px solid var(--border);
-				border-radius: 28px;
-				padding: clamp(1.5rem, 4vw, 3rem);
-				box-shadow: 0 24px 80px rgba(29, 42, 54, 0.12);
-			}
-
-			eyebrow {
-				display: inline-block;
-				letter-spacing: 0.18em;
-				text-transform: uppercase;
-				font-size: 0.75rem;
-				color: var(--accent-2);
-				margin-bottom: 1rem;
-			}
-
-			h1 {
-				font-size: clamp(2.8rem, 8vw, 5.8rem);
-				line-height: 0.95;
-				margin: 0 0 1rem;
-				max-width: 10ch;
-			}
-
-			p {
-				font-size: clamp(1rem, 2.2vw, 1.2rem);
-				line-height: 1.7;
-				max-width: 60ch;
-				margin: 0 0 1.25rem;
-			}
-
-			.grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-				gap: 1rem;
-				margin-top: 2rem;
-			}
-
-			.card {
-				border-radius: 22px;
-				padding: 1.2rem;
-				border: 1px solid var(--border);
-				background: rgba(255, 255, 255, 0.72);
-			}
-
-			.card strong {
-				display: block;
-				margin-bottom: 0.35rem;
-				font-size: 0.95rem;
-				text-transform: uppercase;
-				letter-spacing: 0.08em;
-				color: var(--accent);
-			}
-
-			code {
-				font-family: "Cascadia Code", Consolas, monospace;
-				font-size: 0.95em;
-			}
-
-			a {
-				color: inherit;
-			}
-		</style>
-	</head>
-	<body>
-		<main>
-			<section class="hero">
-				<eyebrow>Static Hosting Smoke Test</eyebrow>
-				<h1>Astro 6.1 on a Google bucket.</h1>
-				<p>
-					This project was built locally with Astro 6.1 and deployed as plain static files to a
-					public Google Cloud Storage bucket.
+			<main class="panel">
+				<div class="kicker">Static Documentation Hub</div>
+				<h1 class="hero-title">Public project docs with bucket-safe navigation.</h1>
+				<p class="lead">
+					This site indexes public repositories under <code>gvillarroel</code>, adds a usable
+					navigation layer, and turns reviewed README content into static pages that can be uploaded
+					directly to Google Cloud Storage.
 				</p>
-				<p>
-					If you can read this page from the bucket website endpoint, the minimal Astro to GCS flow
-					is working end to end.
-				</p>
-				<div class="grid">
-					<div class="card">
-						<strong>Framework</strong>
-						<span><code>astro@6.1.1</code></span>
+				<div class="stats">
+					<div class="stat">
+						<strong>Repositories</strong>
+						<span>{repos.length} public entries indexed</span>
 					</div>
-					<div class="card">
-						<strong>Output</strong>
-						<span><code>dist/</code> static assets</span>
+					<div class="stat">
+						<strong>Hosting</strong>
+						<span>Astro static build on GCS</span>
 					</div>
-					<div class="card">
-						<strong>Deployment</strong>
-						<span><code>gsutil -m rsync -r dist gs://BUCKET</code></span>
+					<div class="stat">
+						<strong>Navigation</strong>
+						<span>Relative links for object URL browsing</span>
 					</div>
-					<div class="card">
+					<div class="stat">
 						<strong>Built</strong>
 						<span>{now}</span>
 					</div>
 				</div>
-			</section>
-		</main>
-	</body>
-</html>
+
+				<div class="cta-row">
+					<a class="button-link" href="https://github.com/gvillarroel/astro-gcs">Site source</a>
+					<a class="button-link" href="projects/knowledge.html">Open a project page</a>
+				</div>
+
+				<section>
+					<div class="card-grid">
+						{
+							featuredRepos.map((repo) => (
+								<article class="card">
+									<strong>{repo.name}</strong>
+									<p>{repo.summary}</p>
+									<div class="tag-list">
+										{repo.tags.map((tag) => (
+											<span class="tag">{tag}</span>
+										))}
+									</div>
+									<div class="cta-row">
+										<a class="button-link" href={`projects/${repo.slug}.html`}>Read docs</a>
+										<a class="button-link" href={repo.repoUrl}>GitHub</a>
+									</div>
+								</article>
+							))
+						}
+					</div>
+				</section>
+			</main>
+		</div>
+	</div>
+</Layout>
