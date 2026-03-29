@@ -38,21 +38,30 @@ const backgroundVars = `--bg-image-1: url(${bg1.src}); --bg-image-2: url(${bg2.s
 		<script>
 			import mermaid from 'mermaid';
 
+			function extractMermaidSource(block: Element) {
+				const lines = Array.from(block.querySelectorAll('.line')).map((line: Element) => line.textContent ?? '');
+				if (lines.length) {
+					return lines.join('\n');
+				}
+				return block.textContent ?? '';
+			}
+
 			function upgradeMermaidBlocks() {
-				const blocks = document.querySelectorAll('pre code.language-mermaid');
+				const blocks = document.querySelectorAll('pre[data-language="mermaid"] code');
 				if (!blocks.length) {
 					return;
 				}
 
 				for (const block of blocks) {
 					const pre = block.closest('pre');
-					if (!pre) {
+					if (!pre || pre.dataset.mermaidUpgraded === 'true') {
 						continue;
 					}
 
 					const container = document.createElement('div');
 					container.className = 'mermaid';
-					container.textContent = block.textContent ?? '';
+					container.textContent = extractMermaidSource(block);
+					pre.dataset.mermaidUpgraded = 'true';
 					pre.replaceWith(container);
 				}
 

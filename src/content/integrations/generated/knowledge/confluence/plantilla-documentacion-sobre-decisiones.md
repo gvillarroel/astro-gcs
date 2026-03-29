@@ -6,7 +6,7 @@ integration: "confluence"
 sourceLabel: "CONFLUENCE"
 sourceUrl: "https://villarroelgj.atlassian.net/spaces/MMM/pages/688320/Plantilla+-+Documentaci+n+sobre+decisiones"
 order: 2
-generatedAt: "2026-03-28T23:55:00.784Z"
+generatedAt: "2026-03-29T00:03:35.521Z"
 ---
 
 > Synced from the local `.knowledge` store and rendered by Astro during the static build.
