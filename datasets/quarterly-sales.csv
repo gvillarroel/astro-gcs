@@ -1,0 +1,13 @@
+date,region,product,revenue,units,margin_pct,channel,is_priority
+2026-01-05,North,Analytics Suite,18200,32,0.34,Direct,true
+2026-01-09,South,Storage Sync,12750,51,0.27,Partner,false
+2026-01-14,West,Analytics Suite,19420,35,0.36,Direct,true
+2026-01-18,East,Workflow Hub,9100,44,0.19,Marketplace,false
+2026-02-02,North,Workflow Hub,10320,47,0.23,Partner,false
+2026-02-07,West,Storage Sync,14480,54,0.25,Direct,true
+2026-02-12,South,Analytics Suite,21600,39,0.38,Direct,true
+2026-02-19,East,Storage Sync,11840,49,0.22,Marketplace,false
+2026-03-01,North,Analytics Suite,22890,41,0.4,Direct,true
+2026-03-05,West,Workflow Hub,11230,46,0.21,Partner,false
+2026-03-10,East,Analytics Suite,20440,37,0.35,Marketplace,true
+2026-03-15,South,Storage Sync,13620,53,0.24,Partner,false

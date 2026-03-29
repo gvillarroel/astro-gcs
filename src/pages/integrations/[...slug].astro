@@ -28,11 +28,11 @@ const currentGroup = groups.find((group) => group.id === entry.data.section);
 	<div class="page-shell">
 		<header class="site-header">
 			<div>
-				<a class="site-title" href="/integrations/index.html">integration / docs</a>
+				<a class="site-title" href="/integrations.html">integration / docs</a>
 				<div class="site-tagline">{integrationSectionLabel(entry.data.section)} / {integrationLabel(entry.data.integration)}</div>
 			</div>
 			<div class="cta-row">
-				<a class="button-link" href="/integrations/index.html">Integration hub</a>
+				<a class="button-link" href="/integrations.html">Integration hub</a>
 				<a class="button-link" href="/index.html">Project index</a>
 				{entry.data.sourceUrl ? <a class="button-link" href={entry.data.sourceUrl}>Open source</a> : null}
 			</div>

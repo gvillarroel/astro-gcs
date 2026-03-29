@@ -6,7 +6,7 @@ integration: "github"
 sourceLabel: "withastro/astro"
 sourceUrl: "https://github.com/withastro/astro"
 order: 2
-generatedAt: "2026-03-29T01:20:48.107Z"
+generatedAt: "2026-03-29T14:25:47.567Z"
 ---
 
 > Remote Markdown fetched at Astro build time.

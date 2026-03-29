@@ -6,7 +6,7 @@ integration: "confluence"
 sourceLabel: "CONFLUENCE"
 sourceUrl: "https://villarroelgj.atlassian.net/spaces/MMM/pages/688308/Plantilla+-+Plan+del+proyecto"
 order: 3
-generatedAt: "2026-03-29T01:20:48.118Z"
+generatedAt: "2026-03-29T14:25:47.577Z"
 ---
 
 > Synced from the local `.knowledge` store and rendered by Astro during the static build.

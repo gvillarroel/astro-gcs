@@ -27,15 +27,26 @@ npm run deploy:gcs
   - local nested Markdown under `src/content/integrations`
   - remote Markdown fetched at build time
   - cached `.knowledge` content synced earlier from Confluence, Jira, and Aha
+- Generates a `datasets` section from local `datasets/**/*.csv` and `datasets/**/*.parquet` files.
 - Uses Astro Markdown rendering plus a shared Mermaid client enhancement.
+- Uses Plotly client-side for interactive charts backed by build-time dataset profiling.
 - Uses object-safe navigation so pages remain browsable from explicit URLs such as `index.html`, `projects/*.html`, and `integrations/**/*.html`.
 
 ## Integration generation
 
 - `npm run generate:integrations` rebuilds the generated Markdown examples before `check`, `build`, and `dev`.
+- The same generation step also scans `datasets/` and emits `src/data/generated-datasets.json`.
 - Remote GitHub README examples are normalized into local Markdown files before Astro renders them.
 - Confluence, Jira, and Aha examples are generated from the existing `~/.knowledge` store.
+- Dataset summaries infer column types, row counts, preview rows, and chart suggestions for CSV and Parquet inputs.
 - If the current shell does not expose the original GitHub API credentials, repository pages fall back to `src/data/repo-snapshot.json`.
+
+## Dataset flow
+
+- Drop `.csv` or `.parquet` files anywhere under `datasets/`.
+- Run `npm run build`, `npm run dev`, or `npm run check`.
+- Open `/datasets.html` to see the generated catalog and `/datasets/<slug>.html` for per-file detail pages.
+- The build prepares Plotly configs for histograms, categorical bars, scatter plots, and date-based trend views when the inferred schema supports them.
 
 ## Hosting target
 

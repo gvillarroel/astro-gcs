@@ -33,6 +33,7 @@ Result:
 - Added `src/pages/404.astro`.
 - Added `scripts/deploy-gcs.ps1` to build and sync `dist/` to a bucket.
 - Added a static integrations section generated from local Markdown, remote Markdown, and cached `.knowledge` sources.
+- Added a static datasets section generated from local CSV and Parquet files with Plotly-based visuals.
 - Updated the homepage content to identify the deployment target, repository index, and integrations section.
 - Changed the deploy script invocation to use `powershell -NoProfile` because the user PowerShell profile produced PSReadLine errors in non-interactive execution.
 

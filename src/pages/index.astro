@@ -23,7 +23,8 @@ const now = new Intl.DateTimeFormat('en-US', {
 				<div class="site-tagline">Public repository documentation and integration examples baked into static HTML for bucket hosting.</div>
 			</div>
 			<div class="cta-row" style="margin-top: 0;">
-				<a class="button-link" href="/integrations/index.html">Integration examples</a>
+				<a class="button-link" href="/integrations.html">Integration examples</a>
+				<a class="button-link" href="/datasets.html">Dataset dashboards</a>
 				<a class="button-link" href="https://github.com/gvillarroel">GitHub profile</a>
 			</div>
 		</header>
@@ -47,41 +48,257 @@ const now = new Intl.DateTimeFormat('en-US', {
 			</aside>
 
 			<main class="panel">
-				<div class="kicker">Astro Build-Time GitHub Index</div>
-				<h1 class="hero-title">Uniform project pages generated from GitHub metadata.</h1>
+				<div class="kicker">Static Site Built With Astro</div>
+				<h1 class="hero-title">This site is assembled before publishing and then served as static files.</h1>
 				<p class="lead">
-					This site iterates the public repositories under <code>gvillarroel</code> during the Astro
-					build, generates one static page per repository, and renders everything with the same local
-					template instead of embedding external README markup.
+					If you have never used Astro, the simplest mental model is a page factory. During the build,
+					Astro takes templates, content, and data, turns them into ready-to-serve HTML/CSS/JS, and writes
+					the final result into <code>dist/</code>. After that, the bucket only serves static files; there is
+					no application server rebuilding pages for each visitor.
 				</p>
 				<div class="stats">
 					<div class="stat">
 						<strong>Repositories</strong>
-						<span>{repos.length} public entries indexed</span>
+						<span>{repos.length} public projects indexed</span>
 					</div>
 					<div class="stat">
-						<strong>Hosting</strong>
+						<strong>Publishing</strong>
 						<span>Astro static build on GCS</span>
 					</div>
 					<div class="stat">
-						<strong>Source model</strong>
-						<span>GitHub API metadata at build time</span>
+						<strong>Input model</strong>
+						<span>Data and content gathered during the build</span>
 					</div>
 					<div class="stat">
-						<strong>Examples</strong>
-						<span>Local, remote, and knowledge-backed Markdown</span>
+						<strong>Generated pages</strong>
+						<span>Repos, integrations, and documentation</span>
 					</div>
 					<div class="stat">
-						<strong>Built</strong>
+						<strong>Datasets</strong>
+						<span>CSV and Parquet summaries with Plotly charts</span>
+					</div>
+					<div class="stat">
+						<strong>Last build</strong>
 						<span>{now}</span>
 					</div>
 				</div>
 
 				<div class="cta-row">
-					<a class="button-link" href="https://github.com/gvillarroel/astro-gcs">Site source</a>
-					<a class="button-link" href="projects/knowledge.html">Open a project page</a>
-					<a class="button-link" href="/integrations/index.html">Browse integration examples</a>
+					<a class="button-link" href="#static-delivery-model">Read the step-by-step walkthrough</a>
+					<a class="button-link" href="/integrations.html">Browse integrations</a>
+					<a class="button-link" href="/datasets.html">Browse datasets</a>
+					<a class="button-link" href="https://github.com/gvillarroel/astro-gcs">Source code</a>
 				</div>
+
+				<section class="integration-section" id="static-delivery-model">
+					<div class="section-heading">
+						<div class="kicker">Step By Step</div>
+						<h2>How this site works, from raw inputs to the final published HTML.</h2>
+						<p class="section-summary">
+							This section explains the full flow as if the reader knows nothing about Astro. The key
+							idea is that this project can accept changing inputs, but the published result is still a
+							set of static files. The intermediate steps are what gather, transform, and convert that
+							information into web pages.
+						</p>
+					</div>
+
+					<div class="card-grid">
+						<article class="card">
+							<strong>Step 1: new information appears</strong>
+							<p>
+								Some local or external process makes new information available: GitHub metadata,
+								generated Markdown, synchronized content from other sources, or <code>CSV</code> and
+								<code>Parquet</code> files that need summaries and charts.
+							</p>
+						</article>
+						<article class="card">
+							<strong>Step 2: scripts prepare the material</strong>
+							<p>
+								Before the site is built, scripts read those sources, transform them, and leave
+								everything ready for Astro. This is where repository pages, integration pages, dataset
+								summaries, and chart configs get prepared.
+							</p>
+						</article>
+						<article class="card">
+							<strong>Step 3: Astro assembles the site</strong>
+							<p>
+								Astro takes templates, Markdown, JSON, and already-prepared data, then turns them into
+								HTML pages, CSS styles, and JavaScript. In other words, Astro acts as the assembler that
+								converts scattered inputs into a navigable site.
+							</p>
+						</article>
+						<article class="card">
+							<strong>Step 4: the final folder is written</strong>
+							<p>
+								The build result is written to <code>dist/</code>. That folder already contains the GitHub
+								metadata pages, the integration pages, the dataset views built from <code>CSV</code> and
+								<code>Parquet</code>, and the Plotly-based charts ready to render.
+							</p>
+						</article>
+						<article class="card">
+							<strong>Step 5: the bucket serves static files</strong>
+							<p>
+								Once published, Google Cloud Storage only serves files that were generated earlier.
+								There is no Astro SSR, no live backend building pages on demand, and no fresh call to the
+								original data source every time a user visits.
+							</p>
+						</article>
+						<article class="card">
+							<strong>How updates happen</strong>
+							<p>
+								This flow can run once a day, once a week, manually whenever needed, or from a GitHub
+								Action triggered by a schedule or by the arrival of new data.
+							</p>
+						</article>
+					</div>
+
+					<div class="docs docs-markdown">
+						<h3>Step 1. Data and content enter from several places</h3>
+						<p>
+							This project does not depend on a single source. Before the build starts, several kinds of
+							input can appear: public GitHub metadata, local Markdown, remote Markdown, synchronized
+							content from external processes, and <code>CSV</code> or <code>Parquet</code> files. At this
+							point, none of that is a web page yet. Astro and the project scripts take those inputs and
+							turn them into navigable pages during the build. Astro’s official documentation on content
+							and build-time data loading describes this idea of working with data before the final render:
+							<a href="https://docs.astro.build/en/reference/content-loader-reference/"> Content Loader API</a>,
+							<a href="https://docs.astro.build/en/reference/modules/astro-content/"> Astro Content API</a>,
+							y <a href="https://docs.astro.build/en/basics/astro-pages/"> Astro Pages</a>.
+						</p>
+						<pre data-language="mermaid"><code>{`flowchart LR
+    A["GitHub metadata"] --> E["Build inputs"]
+    B["Local and remote Markdown"] --> E
+    C["Knowledge sync"] --> E
+    D["CSV and Parquet"] --> E
+    E --> F["Project scripts read and organize everything"]
+`}</code></pre>
+
+						<h3>Step 2. Scripts convert raw inputs into Astro-ready material</h3>
+						<p>
+							This is where a large part of the work we did actually happens. The scripts do not publish
+							the site on their own; they first produce a cleaner intermediate layer. In this repository,
+							that includes generating uniform repository pages, normalizing generated Markdown, reading
+							datasets from <code>CSV</code> and <code>Parquet</code>, summarizing columns, preparing preview
+							rows, and generating Plotly configs. By the time Astro starts rendering pages, it receives
+							much cleaner structures. That fits Astro’s official build-time routing model, including
+							<a href="https://docs.astro.build/en/reference/errors/get-static-paths-required/"> getStaticPaths()</a>
+							and file-based pages inside <code>src/pages</code>.
+						</p>
+						<pre data-language="mermaid"><code>{`flowchart TD
+    A["Raw inputs"] --> B["scripts/generate-integrations.mjs"]
+    B --> C["Generated Markdown"]
+    B --> D["Dataset JSON"]
+    B --> E["Summaries and chart configs"]
+    C --> F["Astro receives prepared content"]
+    D --> F
+    E --> F
+`}</code></pre>
+
+						<h3>Step 3. Astro takes templates, data, and content, then builds pages</h3>
+						<p>
+							If someone knows nothing about Astro, the simplest explanation here is this: Astro is the
+							site builder. It takes components, templates, pages, Markdown, and already-prepared data,
+							then converts them into ready-to-serve HTML, CSS, and JavaScript. In the official docs,
+							Astro explains that <code>static</code> mode prerenders pages during the build and that the
+							default output directory is <code>dist/</code>. This project also uses
+							<code>build.format = 'file'</code>, which is why the final routes are concrete HTML files.
+							Official references:
+							<a href="https://docs.astro.build/en/basics/rendering-modes/"> Rendering Modes</a>,
+							<a href="https://docs.astro.build/en/reference/configuration-reference/#outdir"> outDir</a>,
+							<a href="https://docs.astro.build/en/reference/configuration-reference/#buildformat"> build.format</a>,
+							y <a href="https://v4.docs.astro.build/en/install-and-setup/"> Astro build output</a>.
+						</p>
+						<pre data-language="mermaid"><code>{`flowchart TD
+    A[".astro templates"] --> D["Astro build"]
+    B["Generated Markdown and content"] --> D
+    C["Prepared JSON and data"] --> D
+    D --> E["HTML"]
+    D --> F["CSS"]
+    D --> G["JavaScript"]
+    E --> H["dist/"]
+    F --> H
+    G --> H
+`}</code></pre>
+
+						<h3>Step 4. What lands in dist/ is already the final site</h3>
+						<p>
+							The <code>dist/</code> folder matters because it cleanly separates the build process from the
+							published result. Once Astro finishes, <code>dist/</code> already contains what the user will
+							consume: HTML pages, assets, stylesheets, and scripts. In our case, that includes repository
+							pages, the integrations section, dataset views, and the client-side pieces needed for Mermaid
+							and Plotly. Astro’s CLI documentation also explains that preview serves the static output from
+							<code>dist/</code>:
+							<a href="https://v4.docs.astro.build/es/reference/cli-reference/"> Astro CLI reference</a>.
+						</p>
+						<pre data-language="mermaid"><code>{`flowchart LR
+    A["Astro finishes the build"] --> B["dist/index.html"]
+    A --> C["dist/integrations.html"]
+    A --> D["dist/datasets.html"]
+    A --> E["dist/projects/*.html"]
+    A --> F["dist/_astro/*"]
+`}</code></pre>
+
+						<h3>Step 5. Google Cloud Storage does not rebuild anything</h3>
+						<p>
+							Once we upload <code>dist/</code> to the bucket, Google Cloud Storage acts as static website
+							hosting. That means it serves HTML, CSS, and JavaScript files that were generated earlier.
+							The official Cloud Storage docs explicitly say it can host static websites with client-side
+							technologies like HTML, CSS, and JavaScript, but not server-side dynamic content. That is
+							exactly why this project can accept changing inputs and still publish as a static site:
+							<a href="https://cloud.google.com/storage/docs/hosting-static-website"> Host a static website on Cloud Storage</a>.
+						</p>
+						<pre data-language="mermaid"><code>{`flowchart TD
+    A["Local dist/ output"] --> B["deploy-gcs.ps1"]
+    B --> C["Cloud Storage bucket"]
+    C --> D["The browser requests index.html"]
+    C --> E["The browser requests CSS / JS / images"]
+    C --> F["There is no real-time server-side rendering"]
+`}</code></pre>
+
+						<h3>What we generated in this project</h3>
+						<ul>
+							<li><strong>Repository pages:</strong> generated from public GitHub metadata.</li>
+							<li><strong>Integration pages:</strong> generated from local Markdown, remote Markdown, and synced content.</li>
+							<li><strong>Dataset pages:</strong> generated from <code>CSV</code> and <code>Parquet</code> files.</li>
+							<li><strong>Charts:</strong> Plotly renders visualizations prepared from build-time dataset analysis.</li>
+						</ul>
+
+						<h3>How updates happen when the inputs change</h3>
+						<p>
+							If another process writes new files into the expected locations, for example inside
+							<code>datasets/</code> or generated content folders, the next build absorbs those changes.
+							That build can run once a day, once a week, manually when needed, or from a GitHub Action
+							that runs build and deploy at the right moment. GitHub officially documents both
+							<code>schedule</code> and <code>workflow_dispatch</code> for scheduled and manual workflow
+							runs:
+							<a href="https://docs.github.com/actions/reference/events-that-trigger-workflows"> workflow triggers</a>
+							y <a href="https://docs.github.com/fr/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/manually-running-a-workflow"> manually running a workflow</a>.
+						</p>
+						<pre data-language="mermaid"><code>{`flowchart LR
+    A["Daily update"] --> E["GitHub Action or local job"]
+    B["Weekly update"] --> E
+    C["Manual update"] --> E
+    D["New data arrives"] --> E
+    E --> F["npm run build"]
+    F --> G["new dist/ output"]
+    G --> H["deploy to bucket"]
+`}</code></pre>
+
+						<h3>Why this is still simple to operate</h3>
+						<p>
+							The system looks more complex because it accepts many inputs, but operationally it is still
+							fairly simple: every time the site needs a refresh, the pipeline runs again and replaces the
+							static output. There is no need to keep a live backend querying GitHub, reading datasets, or
+							rendering Markdown for every visit. That cost happens before publishing, not during traffic.
+						</p>
+
+						<h3>Diagram reference</h3>
+						<p>
+							The diagrams on this page use Mermaid. The official flowchart syntax reference is here:
+							<a href="https://mermaid.js.org/syntax/flowchart.html"> Mermaid Flowchart Syntax</a>.
+						</p>
+					</div>
+				</section>
 
 				<section>
 					<div class="card-grid">

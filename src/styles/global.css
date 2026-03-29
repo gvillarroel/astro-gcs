@@ -579,6 +579,59 @@ pre {
 	color: #d8f3e5;
 }
 
+.chart-stack {
+	display: grid;
+	gap: 1rem;
+	margin-top: 1.25rem;
+}
+
+.chart-card {
+	border: 1px solid var(--line);
+	background: rgba(5, 11, 13, 0.88);
+	padding: 1rem;
+}
+
+.plot-surface {
+	min-height: 360px;
+	margin-top: 1rem;
+	border: 1px solid rgba(123, 247, 199, 0.1);
+	background: rgba(4, 8, 10, 0.88);
+}
+
+.table-scroll {
+	margin-top: 1.25rem;
+	overflow-x: auto;
+	border: 1px solid var(--line);
+	background: rgba(5, 11, 13, 0.86);
+}
+
+.data-table {
+	width: 100%;
+	border-collapse: collapse;
+	min-width: 720px;
+}
+
+.data-table th,
+.data-table td {
+	padding: 0.8rem;
+	border-bottom: 1px solid rgba(123, 247, 199, 0.12);
+	text-align: left;
+	vertical-align: top;
+}
+
+.data-table th {
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	font-size: 0.78rem;
+	color: var(--accent);
+	background: rgba(9, 17, 20, 0.96);
+}
+
+.data-table td {
+	color: #d7f7e7;
+	font-size: 0.92rem;
+}
+
 .empty-state {
 	padding: 1rem 1.1rem;
 	border: 1px dashed var(--line);

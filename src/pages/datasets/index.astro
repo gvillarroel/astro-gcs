@@ -1,0 +1,111 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { datasetPath, getDatasetCatalog, getDatasets } from '../../lib/datasets';
+import DatasetCharts from '../../components/DatasetCharts.astro';
+
+const catalog = getDatasetCatalog();
+const datasets = getDatasets();
+const spotlight = datasets[0];
+---
+
+<Layout
+	title="Datasets | gvillarroel Static Docs"
+	description="Static dataset summaries generated from local CSV and Parquet files, with Plotly-based charts."
+>
+	<div class="page-shell">
+		<header class="site-header">
+			<div>
+				<a class="site-title" href="/index.html">gvillarroel / static docs</a>
+				<div class="site-tagline">CSV y Parquet perfilados en build-time para producir una vista resumen y gráficos estáticos.</div>
+			</div>
+			<div class="cta-row">
+				<a class="button-link" href="/index.html">Project index</a>
+				<a class="button-link" href="/integrations.html">Integration examples</a>
+			</div>
+		</header>
+
+		<div class="grid-shell">
+			<aside class="sidebar">
+				<div class="kicker">Dataset Nav</div>
+				<strong>Local datasets</strong>
+				<ul class="repo-list">
+					{
+						datasets.map((dataset) => (
+							<li>
+								<a href={datasetPath(dataset)}>
+									<span class="repo-name">{dataset.name}</span>
+									<span class="repo-meta">
+										{dataset.format} · {dataset.rowCount} rows · {dataset.columnCount} columns
+									</span>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+				{!datasets.length ? <div class="empty-state" style="margin-top: 1rem;">Agrega archivos a <code>datasets/</code> para generar esta sección.</div> : null}
+			</aside>
+
+			<main class="panel">
+				<div class="kicker">Build-Time Dataset Index</div>
+				<h1 class="hero-title">CSV y parquet convertidos en un dashboard estático.</h1>
+				<p class="lead">
+					El build detecta automáticamente archivos bajo <code>{catalog.sourceRoot}/</code>, perfila sus columnas,
+					construye vistas previas y prepara configuraciones de Plotly para explorar el contenido sin backend.
+				</p>
+
+				<div class="stats">
+					<div class="stat">
+						<strong>Datasets</strong>
+						<span>{catalog.datasetCount} archivos detectados</span>
+					</div>
+					<div class="stat">
+						<strong>Source root</strong>
+						<span>{catalog.sourceRoot}/</span>
+					</div>
+					<div class="stat">
+						<strong>Supported formats</strong>
+						<span>CSV and Parquet</span>
+					</div>
+					<div class="stat">
+						<strong>Generated</strong>
+						<span>{new Date(catalog.generatedAt).toLocaleString('en-US', { timeZone: 'America/New_York' })}</span>
+					</div>
+				</div>
+
+				<div class="card-grid">
+					{
+						datasets.map((dataset) => (
+							<article class="card">
+								<strong>{dataset.name}</strong>
+								<p>{dataset.relativePath}</p>
+								<div class="tag-list">
+									<span class="tag">{dataset.format}</span>
+									<span class="tag">{dataset.rowCount} rows</span>
+									<span class="tag">{dataset.columnCount} columns</span>
+									<span class="tag">{dataset.charts.length} charts</span>
+								</div>
+								{dataset.error ? <p class="repo-meta">Read error: {dataset.error}</p> : null}
+								<div class="cta-row">
+									<a class="button-link" href={datasetPath(dataset)}>Open dataset</a>
+								</div>
+							</article>
+						))
+					}
+				</div>
+
+				{
+					spotlight ? (
+						<section class="integration-section">
+							<div class="section-heading">
+								<div class="kicker">Spotlight</div>
+								<h2>{spotlight.name}</h2>
+								<p class="section-summary">La primera colección detectada también se renderiza aquí con sus gráficos principales.</p>
+							</div>
+							<DatasetCharts charts={spotlight.charts.slice(0, 2)} chartGroupId={`spotlight-${spotlight.slug}`} />
+						</section>
+					) : null
+				}
+			</main>
+		</div>
+	</div>
+</Layout>

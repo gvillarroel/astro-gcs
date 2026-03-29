@@ -1,0 +1,155 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import DatasetCharts from '../../components/DatasetCharts.astro';
+import { datasetPath, getDatasets, type DatasetEntry } from '../../lib/datasets';
+
+export function getStaticPaths() {
+	return getDatasets().map((dataset) => ({
+		params: { slug: dataset.slug },
+		props: { dataset },
+	}));
+}
+
+const { dataset } = Astro.props as { dataset: DatasetEntry };
+const datasets = getDatasets();
+const columnNames = dataset.columns.map((column) => column.name);
+---
+
+<Layout
+	title={`${dataset.name} | Dataset Summary`}
+	description={`Static summary and charts for ${dataset.name}, generated from ${dataset.relativePath}.`}
+>
+	<div class="page-shell">
+		<header class="site-header">
+			<div>
+				<a class="site-title" href="/datasets.html">dataset summaries</a>
+				<div class="site-tagline">Resumen tabular y visualización generada desde {dataset.relativePath}.</div>
+			</div>
+			<div class="cta-row">
+				<a class="button-link" href="/datasets.html">All datasets</a>
+				<a class="button-link" href="/index.html">Project index</a>
+			</div>
+		</header>
+
+		<div class="grid-shell">
+			<aside class="sidebar">
+				<div class="kicker">Dataset Nav</div>
+				<strong>Available datasets</strong>
+				<ul class="repo-list">
+					{
+						datasets.map((entry) => (
+							<li>
+								<a href={datasetPath(entry)} data-active={entry.slug === dataset.slug ? 'true' : 'false'}>
+									<span class="repo-name">{entry.name}</span>
+									<span class="repo-meta">
+										{entry.format} · {entry.rowCount} rows · {entry.columnCount} columns
+									</span>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</aside>
+
+			<main class="panel">
+				<div class="kicker">{dataset.format} Dataset</div>
+				<h1 class="hero-title">{dataset.name}</h1>
+				<p class="lead">
+					Archivo fuente: <code>{dataset.relativePath}</code>. Esta vista resume estructura, muestra una
+					muestra de filas y monta gráficos interactivos con Plotly.
+				</p>
+
+				<div class="stats">
+					<div class="stat">
+						<strong>Rows</strong>
+						<span>{dataset.rowCount}</span>
+					</div>
+					<div class="stat">
+						<strong>Columns</strong>
+						<span>{dataset.columnCount}</span>
+					</div>
+					<div class="stat">
+						<strong>Charts</strong>
+						<span>{dataset.charts.length} suggested visuals</span>
+					</div>
+					<div class="stat">
+						<strong>Format</strong>
+						<span>{dataset.format}</span>
+					</div>
+				</div>
+
+				{dataset.error ? <div class="empty-state">No se pudo leer el dataset: {dataset.error}</div> : null}
+
+				<section class="integration-section">
+					<div class="section-heading">
+						<div class="kicker">Columns</div>
+						<h2>Schema profile</h2>
+						<p class="section-summary">Tipado inferido, cardinalidad y valores representativos por columna.</p>
+					</div>
+					<div class="card-grid">
+						{
+							dataset.columns.map((column) => (
+								<article class="card">
+									<strong>{column.name}</strong>
+									<p>
+										Type: {column.kind} · Distinct: {column.distinctCount} · Nulls: {column.nullCount}
+									</p>
+									<div class="tag-list">
+										{column.sampleValues.map((value) => (
+											<span class="tag">{value}</span>
+										))}
+									</div>
+									{column.numericSummary ? (
+										<p class="repo-meta">
+											Min {column.numericSummary.min} · Avg {column.numericSummary.avg.toFixed(2)} · Max {column.numericSummary.max}
+										</p>
+									) : null}
+									{column.timeSummary ? (
+										<p class="repo-meta">
+											{column.timeSummary.min.slice(0, 10)} to {column.timeSummary.max.slice(0, 10)}
+										</p>
+									) : null}
+								</article>
+							))
+						}
+					</div>
+				</section>
+
+				<section class="integration-section">
+					<div class="section-heading">
+						<div class="kicker">Preview</div>
+						<h2>Sample rows</h2>
+						<p class="section-summary">Primeras filas normalizadas del archivo original.</p>
+					</div>
+					<div class="table-scroll">
+						<table class="data-table">
+							<thead>
+								<tr>
+									{columnNames.map((columnName) => <th>{columnName}</th>)}
+								</tr>
+							</thead>
+							<tbody>
+								{
+									dataset.previewRows.map((row) => (
+										<tr>
+											{columnNames.map((columnName) => <td>{String(row[columnName] ?? '')}</td>)}
+										</tr>
+									))
+								}
+							</tbody>
+						</table>
+					</div>
+				</section>
+
+				<section class="integration-section">
+					<div class="section-heading">
+						<div class="kicker">Charts</div>
+						<h2>Interactive visuals</h2>
+						<p class="section-summary">Plotly se carga en cliente y reutiliza configuraciones generadas durante el build.</p>
+					</div>
+					<DatasetCharts charts={dataset.charts} chartGroupId={`dataset-${dataset.slug}`} />
+				</section>
+			</main>
+		</div>
+	</div>
+</Layout>

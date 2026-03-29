@@ -1,0 +1,97 @@
+---
+import type { DatasetChart } from '../lib/datasets';
+
+interface Props {
+	charts: DatasetChart[];
+	chartGroupId: string;
+}
+
+const { charts, chartGroupId } = Astro.props;
+---
+
+{
+	charts.length ? (
+		<div class="chart-stack" data-chart-root={chartGroupId}>
+			<script type="application/json" data-chart-payload is:inline set:html={JSON.stringify(charts)}></script>
+			{
+				charts.map((chart) => (
+					<section class="chart-card">
+						<div class="bucket-heading">
+							<div>
+								<h3>{chart.title}</h3>
+								<p>{chart.description}</p>
+							</div>
+						</div>
+						<div class="plot-surface" id={`${chartGroupId}-${chart.id}`}></div>
+					</section>
+				))
+			}
+		</div>
+	) : (
+		<div class="empty-state">No se pudieron sugerir gráficos automáticos para este dataset.</div>
+	)
+}
+
+<script>
+	const PLOTLY_SRC = 'https://cdn.plot.ly/plotly-2.35.2.min.js';
+	const plotlyWindow = window as Window & { Plotly?: { newPlot: (...args: any[]) => Promise<void> } };
+	let plotlyLoader: Promise<{ newPlot: (...args: any[]) => Promise<void> }> | undefined;
+
+	function loadPlotly() {
+		if (plotlyWindow.Plotly) {
+			return Promise.resolve(plotlyWindow.Plotly);
+		}
+		if (plotlyLoader) {
+			return plotlyLoader;
+		}
+
+		plotlyLoader = new Promise((resolve, reject) => {
+			const existing = document.querySelector(`script[src="${PLOTLY_SRC}"]`);
+			if (existing) {
+				existing.addEventListener('load', () => resolve(plotlyWindow.Plotly!), { once: true });
+				existing.addEventListener('error', reject, { once: true });
+				return;
+			}
+
+			const script = document.createElement('script');
+			script.src = PLOTLY_SRC;
+			script.async = true;
+			script.addEventListener('load', () => resolve(plotlyWindow.Plotly!), { once: true });
+			script.addEventListener('error', reject, { once: true });
+			document.head.append(script);
+		});
+
+		return plotlyLoader;
+	}
+
+	async function renderCharts() {
+		const Plotly = await loadPlotly();
+		for (const root of document.querySelectorAll('[data-chart-root]')) {
+			const chartPayload = root.querySelector('[data-chart-payload]');
+			if (!(chartPayload instanceof HTMLScriptElement)) {
+				continue;
+			}
+			const charts = JSON.parse(chartPayload.textContent ?? '[]');
+			const chartGroupId = root.getAttribute('data-chart-root') ?? 'chart';
+
+			for (const chart of charts) {
+				const container = document.getElementById(`${chartGroupId}-${chart.id}`);
+				if (!container || container.dataset.rendered === 'true') {
+					continue;
+				}
+
+				await Plotly.newPlot(container, chart.traces, chart.layout, {
+					responsive: true,
+					displayModeBar: false,
+				});
+				container.dataset.rendered = 'true';
+			}
+		}
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', renderCharts, { once: true });
+	} else {
+		renderCharts();
+	}
+</script>

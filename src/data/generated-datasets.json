@@ -1,0 +1,1363 @@
+{
+  "generatedAt": "2026-03-29T14:25:47.610Z",
+  "sourceRoot": "datasets",
+  "datasetCount": 2,
+  "datasets": [
+    {
+      "id": "datasets-quarterly-sales-csv",
+      "slug": "datasets-quarterly-sales-csv",
+      "name": "Quarterly Sales",
+      "format": "CSV",
+      "relativePath": "datasets/quarterly-sales.csv",
+      "rowCount": 12,
+      "columnCount": 8,
+      "columns": [
+        {
+          "name": "channel",
+          "kind": "string",
+          "nullCount": 0,
+          "distinctCount": 3,
+          "sampleValues": [
+            "Direct",
+            "Partner",
+            "Marketplace"
+          ],
+          "topValues": [
+            {
+              "label": "Direct",
+              "count": 5
+            },
+            {
+              "label": "Partner",
+              "count": 4
+            },
+            {
+              "label": "Marketplace",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "name": "date",
+          "kind": "date",
+          "nullCount": 0,
+          "distinctCount": 12,
+          "sampleValues": [
+            "2026-01-05",
+            "2026-01-09",
+            "2026-01-14",
+            "2026-01-18",
+            "2026-02-02"
+          ],
+          "topValues": [
+            {
+              "label": "2026-01-05",
+              "count": 1
+            },
+            {
+              "label": "2026-01-09",
+              "count": 1
+            },
+            {
+              "label": "2026-01-14",
+              "count": 1
+            },
+            {
+              "label": "2026-01-18",
+              "count": 1
+            },
+            {
+              "label": "2026-02-02",
+              "count": 1
+            },
+            {
+              "label": "2026-02-07",
+              "count": 1
+            },
+            {
+              "label": "2026-02-12",
+              "count": 1
+            },
+            {
+              "label": "2026-02-19",
+              "count": 1
+            }
+          ],
+          "timeSummary": {
+            "min": "2026-01-05T00:00:00.000Z",
+            "max": "2026-03-15T00:00:00.000Z"
+          }
+        },
+        {
+          "name": "is_priority",
+          "kind": "boolean",
+          "nullCount": 0,
+          "distinctCount": 2,
+          "sampleValues": [
+            "true",
+            "false"
+          ],
+          "topValues": [
+            {
+              "label": "false",
+              "count": 6
+            },
+            {
+              "label": "true",
+              "count": 6
+            }
+          ]
+        },
+        {
+          "name": "margin_pct",
+          "kind": "number",
+          "nullCount": 0,
+          "distinctCount": 12,
+          "sampleValues": [
+            "0.34",
+            "0.27",
+            "0.36",
+            "0.19",
+            "0.23"
+          ],
+          "topValues": [
+            {
+              "label": "0.19",
+              "count": 1
+            },
+            {
+              "label": "0.21",
+              "count": 1
+            },
+            {
+              "label": "0.22",
+              "count": 1
+            },
+            {
+              "label": "0.23",
+              "count": 1
+            },
+            {
+              "label": "0.24",
+              "count": 1
+            },
+            {
+              "label": "0.25",
+              "count": 1
+            },
+            {
+              "label": "0.27",
+              "count": 1
+            },
+            {
+              "label": "0.34",
+              "count": 1
+            }
+          ],
+          "numericSummary": {
+            "min": 0.19,
+            "max": 0.4,
+            "avg": 0.2866666666666667
+          }
+        },
+        {
+          "name": "product",
+          "kind": "string",
+          "nullCount": 0,
+          "distinctCount": 3,
+          "sampleValues": [
+            "Analytics Suite",
+            "Storage Sync",
+            "Workflow Hub"
+          ],
+          "topValues": [
+            {
+              "label": "Analytics Suite",
+              "count": 5
+            },
+            {
+              "label": "Storage Sync",
+              "count": 4
+            },
+            {
+              "label": "Workflow Hub",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "name": "region",
+          "kind": "string",
+          "nullCount": 0,
+          "distinctCount": 4,
+          "sampleValues": [
+            "North",
+            "South",
+            "West",
+            "East"
+          ],
+          "topValues": [
+            {
+              "label": "East",
+              "count": 3
+            },
+            {
+              "label": "North",
+              "count": 3
+            },
+            {
+              "label": "South",
+              "count": 3
+            },
+            {
+              "label": "West",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "name": "revenue",
+          "kind": "number",
+          "nullCount": 0,
+          "distinctCount": 12,
+          "sampleValues": [
+            "18200",
+            "12750",
+            "19420",
+            "9100",
+            "10320"
+          ],
+          "topValues": [
+            {
+              "label": "10320",
+              "count": 1
+            },
+            {
+              "label": "11230",
+              "count": 1
+            },
+            {
+              "label": "11840",
+              "count": 1
+            },
+            {
+              "label": "12750",
+              "count": 1
+            },
+            {
+              "label": "13620",
+              "count": 1
+            },
+            {
+              "label": "14480",
+              "count": 1
+            },
+            {
+              "label": "18200",
+              "count": 1
+            },
+            {
+              "label": "19420",
+              "count": 1
+            }
+          ],
+          "numericSummary": {
+            "min": 9100,
+            "max": 22890,
+            "avg": 15490.833333333334
+          }
+        },
+        {
+          "name": "units",
+          "kind": "number",
+          "nullCount": 0,
+          "distinctCount": 12,
+          "sampleValues": [
+            "32",
+            "51",
+            "35",
+            "44",
+            "47"
+          ],
+          "topValues": [
+            {
+              "label": "32",
+              "count": 1
+            },
+            {
+              "label": "35",
+              "count": 1
+            },
+            {
+              "label": "37",
+              "count": 1
+            },
+            {
+              "label": "39",
+              "count": 1
+            },
+            {
+              "label": "41",
+              "count": 1
+            },
+            {
+              "label": "44",
+              "count": 1
+            },
+            {
+              "label": "46",
+              "count": 1
+            },
+            {
+              "label": "47",
+              "count": 1
+            }
+          ],
+          "numericSummary": {
+            "min": 32,
+            "max": 54,
+            "avg": 44
+          }
+        }
+      ],
+      "previewRows": [
+        {
+          "date": "2026-01-05",
+          "region": "North",
+          "product": "Analytics Suite",
+          "revenue": "18200",
+          "units": "32",
+          "margin_pct": "0.34",
+          "channel": "Direct",
+          "is_priority": "true"
+        },
+        {
+          "date": "2026-01-09",
+          "region": "South",
+          "product": "Storage Sync",
+          "revenue": "12750",
+          "units": "51",
+          "margin_pct": "0.27",
+          "channel": "Partner",
+          "is_priority": "false"
+        },
+        {
+          "date": "2026-01-14",
+          "region": "West",
+          "product": "Analytics Suite",
+          "revenue": "19420",
+          "units": "35",
+          "margin_pct": "0.36",
+          "channel": "Direct",
+          "is_priority": "true"
+        },
+        {
+          "date": "2026-01-18",
+          "region": "East",
+          "product": "Workflow Hub",
+          "revenue": "9100",
+          "units": "44",
+          "margin_pct": "0.19",
+          "channel": "Marketplace",
+          "is_priority": "false"
+        },
+        {
+          "date": "2026-02-02",
+          "region": "North",
+          "product": "Workflow Hub",
+          "revenue": "10320",
+          "units": "47",
+          "margin_pct": "0.23",
+          "channel": "Partner",
+          "is_priority": "false"
+        },
+        {
+          "date": "2026-02-07",
+          "region": "West",
+          "product": "Storage Sync",
+          "revenue": "14480",
+          "units": "54",
+          "margin_pct": "0.25",
+          "channel": "Direct",
+          "is_priority": "true"
+        },
+        {
+          "date": "2026-02-12",
+          "region": "South",
+          "product": "Analytics Suite",
+          "revenue": "21600",
+          "units": "39",
+          "margin_pct": "0.38",
+          "channel": "Direct",
+          "is_priority": "true"
+        },
+        {
+          "date": "2026-02-19",
+          "region": "East",
+          "product": "Storage Sync",
+          "revenue": "11840",
+          "units": "49",
+          "margin_pct": "0.22",
+          "channel": "Marketplace",
+          "is_priority": "false"
+        }
+      ],
+      "charts": [
+        {
+          "id": "hist-margin-pct",
+          "title": "margin_pct distribution",
+          "description": "Histogram built from numeric values in margin_pct.",
+          "traces": [
+            {
+              "type": "bar",
+              "x": [
+                "0.19 - 0.24",
+                "0.24 - 0.29",
+                "0.30 - 0.35",
+                "0.35 - 0.40"
+              ],
+              "y": [
+                5,
+                2,
+                1,
+                4
+              ],
+              "marker": {
+                "color": "#7bf7c7",
+                "line": {
+                  "color": "#b6ffd9",
+                  "width": 1
+                }
+              }
+            }
+          ],
+          "layout": {
+            "title": "Quarterly Sales: margin_pct",
+            "paper_bgcolor": "rgba(0,0,0,0)",
+            "plot_bgcolor": "rgba(6,12,14,0.86)",
+            "font": {
+              "color": "#d7f7e7",
+              "family": "Cascadia Code, JetBrains Mono, IBM Plex Mono, monospace"
+            },
+            "margin": {
+              "t": 52,
+              "r": 24,
+              "b": 52,
+              "l": 52
+            },
+            "xaxis": {
+              "title": "margin_pct",
+              "tickangle": -24,
+              "gridcolor": "rgba(123,247,199,0.08)"
+            },
+            "yaxis": {
+              "title": "Rows",
+              "gridcolor": "rgba(123,247,199,0.12)"
+            }
+          }
+        },
+        {
+          "id": "hist-revenue",
+          "title": "revenue distribution",
+          "description": "Histogram built from numeric values in revenue.",
+          "traces": [
+            {
+              "type": "bar",
+              "x": [
+                "9100.00 - 12547.50",
+                "12547.50 - 15995.00",
+                "15995.00 - 19442.50",
+                "19442.50 - 22890.00"
+              ],
+              "y": [
+                4,
+                3,
+                2,
+                3
+              ],
+              "marker": {
+                "color": "#7bf7c7",
+                "line": {
+                  "color": "#b6ffd9",
+                  "width": 1
+                }
+              }
+            }
+          ],
+          "layout": {
+            "title": "Quarterly Sales: revenue",
+            "paper_bgcolor": "rgba(0,0,0,0)",
+            "plot_bgcolor": "rgba(6,12,14,0.86)",
+            "font": {
+              "color": "#d7f7e7",
+              "family": "Cascadia Code, JetBrains Mono, IBM Plex Mono, monospace"
+            },
+            "margin": {
+              "t": 52,
+              "r": 24,
+              "b": 52,
+              "l": 52
+            },
+            "xaxis": {
+              "title": "revenue",
+              "tickangle": -24,
+              "gridcolor": "rgba(123,247,199,0.08)"
+            },
+            "yaxis": {
+              "title": "Rows",
+              "gridcolor": "rgba(123,247,199,0.12)"
+            }
+          }
+        },
+        {
+          "id": "bar-channel",
+          "title": "channel top values",
+          "description": "Most frequent values found in channel.",
+          "traces": [
+            {
+              "type": "bar",
+              "x": [
+                "Direct",
+                "Partner",
+                "Marketplace"
+              ],
+              "y": [
+                5,
+                4,
+                3
+              ],
+              "marker": {
+                "color": "#8fb7ff",
+                "line": {
+                  "color": "#d7f7e7",
+                  "width": 1
+                }
+              }
+            }
+          ],
+          "layout": {
+            "title": "Quarterly Sales: channel",
+            "paper_bgcolor": "rgba(0,0,0,0)",
+            "plot_bgcolor": "rgba(6,12,14,0.86)",
+            "font": {
+              "color": "#d7f7e7",
+              "family": "Cascadia Code, JetBrains Mono, IBM Plex Mono, monospace"
+            },
+            "margin": {
+              "t": 52,
+              "r": 24,
+              "b": 52,
+              "l": 52
+            },
+            "xaxis": {
+              "title": "channel",
+              "tickangle": -24,
+              "gridcolor": "rgba(123,247,199,0.08)"
+            },
+            "yaxis": {
+              "title": "Rows",
+              "gridcolor": "rgba(123,247,199,0.12)"
+            }
+          }
+        },
+        {
+          "id": "bar-is-priority",
+          "title": "is_priority top values",
+          "description": "Most frequent values found in is_priority.",
+          "traces": [
+            {
+              "type": "bar",
+              "x": [
+                "false",
+                "true"
+              ],
+              "y": [
+                6,
+                6
+              ],
+              "marker": {
+                "color": "#8fb7ff",
+                "line": {
+                  "color": "#d7f7e7",
+                  "width": 1
+                }
+              }
+            }
+          ],
+          "layout": {
+            "title": "Quarterly Sales: is_priority",
+            "paper_bgcolor": "rgba(0,0,0,0)",
+            "plot_bgcolor": "rgba(6,12,14,0.86)",
+            "font": {
+              "color": "#d7f7e7",
+              "family": "Cascadia Code, JetBrains Mono, IBM Plex Mono, monospace"
+            },
+            "margin": {
+              "t": 52,
+              "r": 24,
+              "b": 52,
+              "l": 52
+            },
+            "xaxis": {
+              "title": "is_priority",
+              "tickangle": -24,
+              "gridcolor": "rgba(123,247,199,0.08)"
+            },
+            "yaxis": {
+              "title": "Rows",
+              "gridcolor": "rgba(123,247,199,0.12)"
+            }
+          }
+        },
+        {
+          "id": "scatter-margin-pct-revenue",
+          "title": "margin_pct vs revenue",
+          "description": "Quick scatter view comparing the first two numeric columns.",
+          "traces": [
+            {
+              "type": "scatter",
+              "mode": "markers",
+              "x": [
+                0.34,
+                0.27,
+                0.36,
+                0.19,
+                0.23,
+                0.25,
+                0.38,
+                0.22,
+                0.4,
+                0.21,
+                0.35,
+                0.24
+              ],
+              "y": [
+                18200,
+                12750,
+                19420,
+                9100,
+                10320,
+                14480,
+                21600,
+                11840,
+                22890,
+                11230,
+                20440,
+                13620
+              ],
+              "marker": {
+                "color": "#7bf7c7",
+                "size": 10,
+                "line": {
+                  "color": "#042d1d",
+                  "width": 1
+                }
+              }
+            }
+          ],
+          "layout": {
+            "title": "Quarterly Sales: margin_pct vs revenue",
+            "paper_bgcolor": "rgba(0,0,0,0)",
+            "plot_bgcolor": "rgba(6,12,14,0.86)",
+            "font": {
+              "color": "#d7f7e7",
+              "family": "Cascadia Code, JetBrains Mono, IBM Plex Mono, monospace"
+            },
+            "margin": {
+              "t": 52,
+              "r": 24,
+              "b": 52,
+              "l": 52
+            },
+            "xaxis": {
+              "title": "margin_pct",
+              "gridcolor": "rgba(123,247,199,0.08)"
+            },
+            "yaxis": {
+              "title": "revenue",
+              "gridcolor": "rgba(123,247,199,0.12)"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "datasets-quarterly-sales-parquet",
+      "slug": "datasets-quarterly-sales-parquet",
+      "name": "Quarterly Sales",
+      "format": "PARQUET",
+      "relativePath": "datasets/quarterly-sales.parquet",
+      "rowCount": 12,
+      "columnCount": 8,
+      "columns": [
+        {
+          "name": "channel",
+          "kind": "string",
+          "nullCount": 0,
+          "distinctCount": 3,
+          "sampleValues": [
+            "Direct",
+            "Partner",
+            "Marketplace"
+          ],
+          "topValues": [
+            {
+              "label": "Direct",
+              "count": 5
+            },
+            {
+              "label": "Partner",
+              "count": 4
+            },
+            {
+              "label": "Marketplace",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "name": "date",
+          "kind": "date",
+          "nullCount": 0,
+          "distinctCount": 12,
+          "sampleValues": [
+            "2026-01-05",
+            "2026-01-09",
+            "2026-01-14",
+            "2026-01-18",
+            "2026-02-02"
+          ],
+          "topValues": [
+            {
+              "label": "2026-01-05",
+              "count": 1
+            },
+            {
+              "label": "2026-01-09",
+              "count": 1
+            },
+            {
+              "label": "2026-01-14",
+              "count": 1
+            },
+            {
+              "label": "2026-01-18",
+              "count": 1
+            },
+            {
+              "label": "2026-02-02",
+              "count": 1
+            },
+            {
+              "label": "2026-02-07",
+              "count": 1
+            },
+            {
+              "label": "2026-02-12",
+              "count": 1
+            },
+            {
+              "label": "2026-02-19",
+              "count": 1
+            }
+          ],
+          "timeSummary": {
+            "min": "2026-01-05T00:00:00.000Z",
+            "max": "2026-03-15T00:00:00.000Z"
+          }
+        },
+        {
+          "name": "is_priority",
+          "kind": "boolean",
+          "nullCount": 0,
+          "distinctCount": 2,
+          "sampleValues": [
+            "true",
+            "false"
+          ],
+          "topValues": [
+            {
+              "label": "false",
+              "count": 6
+            },
+            {
+              "label": "true",
+              "count": 6
+            }
+          ]
+        },
+        {
+          "name": "margin_pct",
+          "kind": "number",
+          "nullCount": 0,
+          "distinctCount": 12,
+          "sampleValues": [
+            "0.34",
+            "0.27",
+            "0.36",
+            "0.19",
+            "0.23"
+          ],
+          "topValues": [
+            {
+              "label": "0.19",
+              "count": 1
+            },
+            {
+              "label": "0.21",
+              "count": 1
+            },
+            {
+              "label": "0.22",
+              "count": 1
+            },
+            {
+              "label": "0.23",
+              "count": 1
+            },
+            {
+              "label": "0.24",
+              "count": 1
+            },
+            {
+              "label": "0.25",
+              "count": 1
+            },
+            {
+              "label": "0.27",
+              "count": 1
+            },
+            {
+              "label": "0.34",
+              "count": 1
+            }
+          ],
+          "numericSummary": {
+            "min": 0.19,
+            "max": 0.4,
+            "avg": 0.2866666666666667
+          }
+        },
+        {
+          "name": "product",
+          "kind": "string",
+          "nullCount": 0,
+          "distinctCount": 3,
+          "sampleValues": [
+            "Analytics Suite",
+            "Storage Sync",
+            "Workflow Hub"
+          ],
+          "topValues": [
+            {
+              "label": "Analytics Suite",
+              "count": 5
+            },
+            {
+              "label": "Storage Sync",
+              "count": 4
+            },
+            {
+              "label": "Workflow Hub",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "name": "region",
+          "kind": "string",
+          "nullCount": 0,
+          "distinctCount": 4,
+          "sampleValues": [
+            "North",
+            "South",
+            "West",
+            "East"
+          ],
+          "topValues": [
+            {
+              "label": "East",
+              "count": 3
+            },
+            {
+              "label": "North",
+              "count": 3
+            },
+            {
+              "label": "South",
+              "count": 3
+            },
+            {
+              "label": "West",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "name": "revenue",
+          "kind": "number",
+          "nullCount": 0,
+          "distinctCount": 12,
+          "sampleValues": [
+            "18200",
+            "12750",
+            "19420",
+            "9100",
+            "10320"
+          ],
+          "topValues": [
+            {
+              "label": "10320",
+              "count": 1
+            },
+            {
+              "label": "11230",
+              "count": 1
+            },
+            {
+              "label": "11840",
+              "count": 1
+            },
+            {
+              "label": "12750",
+              "count": 1
+            },
+            {
+              "label": "13620",
+              "count": 1
+            },
+            {
+              "label": "14480",
+              "count": 1
+            },
+            {
+              "label": "18200",
+              "count": 1
+            },
+            {
+              "label": "19420",
+              "count": 1
+            }
+          ],
+          "numericSummary": {
+            "min": 9100,
+            "max": 22890,
+            "avg": 15490.833333333334
+          }
+        },
+        {
+          "name": "units",
+          "kind": "number",
+          "nullCount": 0,
+          "distinctCount": 12,
+          "sampleValues": [
+            "32",
+            "51",
+            "35",
+            "44",
+            "47"
+          ],
+          "topValues": [
+            {
+              "label": "32",
+              "count": 1
+            },
+            {
+              "label": "35",
+              "count": 1
+            },
+            {
+              "label": "37",
+              "count": 1
+            },
+            {
+              "label": "39",
+              "count": 1
+            },
+            {
+              "label": "41",
+              "count": 1
+            },
+            {
+              "label": "44",
+              "count": 1
+            },
+            {
+              "label": "46",
+              "count": 1
+            },
+            {
+              "label": "47",
+              "count": 1
+            }
+          ],
+          "numericSummary": {
+            "min": 32,
+            "max": 54,
+            "avg": 44
+          }
+        }
+      ],
+      "previewRows": [
+        {
+          "date": "2026-01-05",
+          "region": "North",
+          "product": "Analytics Suite",
+          "revenue": 18200,
+          "units": 32,
+          "margin_pct": 0.34,
+          "channel": "Direct",
+          "is_priority": true
+        },
+        {
+          "date": "2026-01-09",
+          "region": "South",
+          "product": "Storage Sync",
+          "revenue": 12750,
+          "units": 51,
+          "margin_pct": 0.27,
+          "channel": "Partner",
+          "is_priority": false
+        },
+        {
+          "date": "2026-01-14",
+          "region": "West",
+          "product": "Analytics Suite",
+          "revenue": 19420,
+          "units": 35,
+          "margin_pct": 0.36,
+          "channel": "Direct",
+          "is_priority": true
+        },
+        {
+          "date": "2026-01-18",
+          "region": "East",
+          "product": "Workflow Hub",
+          "revenue": 9100,
+          "units": 44,
+          "margin_pct": 0.19,
+          "channel": "Marketplace",
+          "is_priority": false
+        },
+        {
+          "date": "2026-02-02",
+          "region": "North",
+          "product": "Workflow Hub",
+          "revenue": 10320,
+          "units": 47,
+          "margin_pct": 0.23,
+          "channel": "Partner",
+          "is_priority": false
+        },
+        {
+          "date": "2026-02-07",
+          "region": "West",
+          "product": "Storage Sync",
+          "revenue": 14480,
+          "units": 54,
+          "margin_pct": 0.25,
+          "channel": "Direct",
+          "is_priority": true
+        },
+        {
+          "date": "2026-02-12",
+          "region": "South",
+          "product": "Analytics Suite",
+          "revenue": 21600,
+          "units": 39,
+          "margin_pct": 0.38,
+          "channel": "Direct",
+          "is_priority": true
+        },
+        {
+          "date": "2026-02-19",
+          "region": "East",
+          "product": "Storage Sync",
+          "revenue": 11840,
+          "units": 49,
+          "margin_pct": 0.22,
+          "channel": "Marketplace",
+          "is_priority": false
+        }
+      ],
+      "charts": [
+        {
+          "id": "hist-margin-pct",
+          "title": "margin_pct distribution",
+          "description": "Histogram built from numeric values in margin_pct.",
+          "traces": [
+            {
+              "type": "bar",
+              "x": [
+                "0.19 - 0.24",
+                "0.24 - 0.29",
+                "0.30 - 0.35",
+                "0.35 - 0.40"
+              ],
+              "y": [
+                5,
+                2,
+                1,
+                4
+              ],
+              "marker": {
+                "color": "#7bf7c7",
+                "line": {
+                  "color": "#b6ffd9",
+                  "width": 1
+                }
+              }
+            }
+          ],
+          "layout": {
+            "title": "Quarterly Sales: margin_pct",
+            "paper_bgcolor": "rgba(0,0,0,0)",
+            "plot_bgcolor": "rgba(6,12,14,0.86)",
+            "font": {
+              "color": "#d7f7e7",
+              "family": "Cascadia Code, JetBrains Mono, IBM Plex Mono, monospace"
+            },
+            "margin": {
+              "t": 52,
+              "r": 24,
+              "b": 52,
+              "l": 52
+            },
+            "xaxis": {
+              "title": "margin_pct",
+              "tickangle": -24,
+              "gridcolor": "rgba(123,247,199,0.08)"
+            },
+            "yaxis": {
+              "title": "Rows",
+              "gridcolor": "rgba(123,247,199,0.12)"
+            }
+          }
+        },
+        {
+          "id": "hist-revenue",
+          "title": "revenue distribution",
+          "description": "Histogram built from numeric values in revenue.",
+          "traces": [
+            {
+              "type": "bar",
+              "x": [
+                "9100.00 - 12547.50",
+                "12547.50 - 15995.00",
+                "15995.00 - 19442.50",
+                "19442.50 - 22890.00"
+              ],
+              "y": [
+                4,
+                3,
+                2,
+                3
+              ],
+              "marker": {
+                "color": "#7bf7c7",
+                "line": {
+                  "color": "#b6ffd9",
+                  "width": 1
+                }
+              }
+            }
+          ],
+          "layout": {
+            "title": "Quarterly Sales: revenue",
+            "paper_bgcolor": "rgba(0,0,0,0)",
+            "plot_bgcolor": "rgba(6,12,14,0.86)",
+            "font": {
+              "color": "#d7f7e7",
+              "family": "Cascadia Code, JetBrains Mono, IBM Plex Mono, monospace"
+            },
+            "margin": {
+              "t": 52,
+              "r": 24,
+              "b": 52,
+              "l": 52
+            },
+            "xaxis": {
+              "title": "revenue",
+              "tickangle": -24,
+              "gridcolor": "rgba(123,247,199,0.08)"
+            },
+            "yaxis": {
+              "title": "Rows",
+              "gridcolor": "rgba(123,247,199,0.12)"
+            }
+          }
+        },
+        {
+          "id": "bar-channel",
+          "title": "channel top values",
+          "description": "Most frequent values found in channel.",
+          "traces": [
+            {
+              "type": "bar",
+              "x": [
+                "Direct",
+                "Partner",
+                "Marketplace"
+              ],
+              "y": [
+                5,
+                4,
+                3
+              ],
+              "marker": {
+                "color": "#8fb7ff",
+                "line": {
+                  "color": "#d7f7e7",
+                  "width": 1
+                }
+              }
+            }
+          ],
+          "layout": {
+            "title": "Quarterly Sales: channel",
+            "paper_bgcolor": "rgba(0,0,0,0)",
+            "plot_bgcolor": "rgba(6,12,14,0.86)",
+            "font": {
+              "color": "#d7f7e7",
+              "family": "Cascadia Code, JetBrains Mono, IBM Plex Mono, monospace"
+            },
+            "margin": {
+              "t": 52,
+              "r": 24,
+              "b": 52,
+              "l": 52
+            },
+            "xaxis": {
+              "title": "channel",
+              "tickangle": -24,
+              "gridcolor": "rgba(123,247,199,0.08)"
+            },
+            "yaxis": {
+              "title": "Rows",
+              "gridcolor": "rgba(123,247,199,0.12)"
+            }
+          }
+        },
+        {
+          "id": "bar-is-priority",
+          "title": "is_priority top values",
+          "description": "Most frequent values found in is_priority.",
+          "traces": [
+            {
+              "type": "bar",
+              "x": [
+                "false",
+                "true"
+              ],
+              "y": [
+                6,
+                6
+              ],
+              "marker": {
+                "color": "#8fb7ff",
+                "line": {
+                  "color": "#d7f7e7",
+                  "width": 1
+                }
+              }
+            }
+          ],
+          "layout": {
+            "title": "Quarterly Sales: is_priority",
+            "paper_bgcolor": "rgba(0,0,0,0)",
+            "plot_bgcolor": "rgba(6,12,14,0.86)",
+            "font": {
+              "color": "#d7f7e7",
+              "family": "Cascadia Code, JetBrains Mono, IBM Plex Mono, monospace"
+            },
+            "margin": {
+              "t": 52,
+              "r": 24,
+              "b": 52,
+              "l": 52
+            },
+            "xaxis": {
+              "title": "is_priority",
+              "tickangle": -24,
+              "gridcolor": "rgba(123,247,199,0.08)"
+            },
+            "yaxis": {
+              "title": "Rows",
+              "gridcolor": "rgba(123,247,199,0.12)"
+            }
+          }
+        },
+        {
+          "id": "scatter-margin-pct-revenue",
+          "title": "margin_pct vs revenue",
+          "description": "Quick scatter view comparing the first two numeric columns.",
+          "traces": [
+            {
+              "type": "scatter",
+              "mode": "markers",
+              "x": [
+                0.34,
+                0.27,
+                0.36,
+                0.19,
+                0.23,
+                0.25,
+                0.38,
+                0.22,
+                0.4,
+                0.21,
+                0.35,
+                0.24
+              ],
+              "y": [
+                18200,
+                12750,
+                19420,
+                9100,
+                10320,
+                14480,
+                21600,
+                11840,
+                22890,
+                11230,
+                20440,
+                13620
+              ],
+              "marker": {
+                "color": "#7bf7c7",
+                "size": 10,
+                "line": {
+                  "color": "#042d1d",
+                  "width": 1
+                }
+              }
+            }
+          ],
+          "layout": {
+            "title": "Quarterly Sales: margin_pct vs revenue",
+            "paper_bgcolor": "rgba(0,0,0,0)",
+            "plot_bgcolor": "rgba(6,12,14,0.86)",
+            "font": {
+              "color": "#d7f7e7",
+              "family": "Cascadia Code, JetBrains Mono, IBM Plex Mono, monospace"
+            },
+            "margin": {
+              "t": 52,
+              "r": 24,
+              "b": 52,
+              "l": 52
+            },
+            "xaxis": {
+              "title": "margin_pct",
+              "gridcolor": "rgba(123,247,199,0.08)"
+            },
+            "yaxis": {
+              "title": "revenue",
+              "gridcolor": "rgba(123,247,199,0.12)"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
