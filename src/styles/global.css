@@ -230,11 +230,91 @@ pre {
 }
 
 .nav-label {
-	margin-top: 0.75rem;
 	font-size: 0.72rem;
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
 	color: var(--accent-2);
+}
+
+.nav-count {
+	font-size: 0.74rem;
+	color: var(--muted);
+}
+
+.nav-description,
+.section-summary,
+.bucket-heading p {
+	margin: 0.35rem 0 0;
+	color: var(--muted);
+	font-size: 0.88rem;
+	line-height: 1.5;
+}
+
+.section-stack {
+	display: grid;
+	gap: 0.85rem;
+	margin-top: 1rem;
+}
+
+.nav-section-block {
+	padding: 0.85rem;
+	border: 1px solid rgba(123, 247, 199, 0.08);
+	background: rgba(6, 12, 14, 0.44);
+}
+
+.active-block {
+	border-color: rgba(123, 247, 199, 0.18);
+	background: rgba(9, 18, 17, 0.64);
+}
+
+.nav-section-head,
+.bucket-heading {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 0.75rem;
+}
+
+.nav-bucket {
+	margin-top: 0.8rem;
+}
+
+.nav-bucket-title {
+	font-size: 0.78rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--accent);
+	margin-bottom: 0.5rem;
+}
+
+.compact-list {
+	margin-top: 0;
+}
+
+.compact-list a {
+	padding: 0.62rem 0.72rem;
+}
+
+.section-jump-list {
+	display: grid;
+	gap: 0.5rem;
+	margin-top: 0.7rem;
+}
+
+.section-jump-link {
+	display: flex;
+	justify-content: space-between;
+	gap: 0.75rem;
+	align-items: center;
+	padding: 0.65rem 0.75rem;
+	text-decoration: none;
+	border: 1px solid rgba(123, 247, 199, 0.08);
+	background: rgba(6, 12, 14, 0.4);
+}
+
+.section-jump-link small {
+	color: var(--muted);
+	font-size: 0.74rem;
 }
 
 .kicker {
@@ -457,6 +537,18 @@ pre {
 
 .section-heading h2 {
 	margin: 0;
+}
+
+.bucket-section {
+	margin-top: 1.4rem;
+}
+
+.bucket-heading h3 {
+	margin: 0;
+	font-size: 1rem;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: var(--accent-2);
 }
 
 .terminal-callout {

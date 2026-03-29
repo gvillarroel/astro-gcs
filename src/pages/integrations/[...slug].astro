@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import {
+	groupIntegrations,
 	integrationLabel,
 	integrationPath,
 	integrationSectionLabel,
@@ -19,6 +20,8 @@ export async function getStaticPaths() {
 const { entry, entries: allEntries } = Astro.props;
 const Content = entry.Content;
 const headings = [];
+const groups = groupIntegrations(allEntries);
+const currentGroup = groups.find((group) => group.id === entry.data.section);
 ---
 
 <Layout title={`${entry.data.title} | Integration Examples`} description={entry.data.summary ?? entry.data.title}>
@@ -38,19 +41,47 @@ const headings = [];
 		<div class="grid-shell">
 			<aside class="sidebar">
 				<div class="kicker">Integration Nav</div>
-				<strong>Pages</strong>
-				<ul class="repo-list">
-					{
-						allEntries.map((item) => (
-							<li>
-								<a href={integrationPath(item)} data-active={item.id === entry.id ? 'true' : 'false'}>
-									<span class="repo-name">{item.data.title}</span>
-									<span class="repo-meta">{item.data.summary}</span>
-								</a>
-							</li>
-						))
-					}
-				</ul>
+				<strong>Browse</strong>
+				<div class="section-stack">
+					<div class="nav-section-block active-block">
+						<div class="nav-section-head">
+							<div class="nav-label">{currentGroup?.label}</div>
+							<div class="nav-count">{currentGroup?.count ?? 0}</div>
+						</div>
+						<p class="nav-description">{currentGroup?.description}</p>
+						{
+							currentGroup?.buckets.map((bucket) => (
+								<div class="nav-bucket">
+									<div class="nav-bucket-title">{bucket.label}</div>
+									<ul class="repo-list compact-list">
+										{bucket.entries.map((item) => (
+											<li>
+												<a href={integrationPath(item)} data-active={item.id === entry.id ? 'true' : 'false'}>
+													<span class="repo-name">{item.data.title}</span>
+													<span class="repo-meta">{item.data.summary}</span>
+												</a>
+											</li>
+										))}
+									</ul>
+								</div>
+							))
+						}
+					</div>
+
+					<div class="nav-section-block">
+						<div class="nav-label">Other sections</div>
+						<div class="section-jump-list">
+							{groups
+								.filter((group) => group.id !== entry.data.section)
+								.map((group) => (
+									<a class="section-jump-link" href={`/integrations.html#${group.id}`}>
+										<span>{group.label}</span>
+										<small>{group.count} pages</small>
+									</a>
+								))}
+						</div>
+					</div>
+				</div>
 			</aside>
 
 			<main class="panel">

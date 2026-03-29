@@ -1,18 +1,14 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import {
+	groupIntegrations,
 	integrationLabel,
 	integrationPath,
-	integrationSectionLabel,
 	loadIntegrationEntries,
 } from '../../lib/integrations';
 
 const entries = await loadIntegrationEntries();
-const groups = (['local', 'remote', 'knowledge'] as const).map((section) => ({
-	section,
-	label: integrationSectionLabel(section),
-	entries: entries.filter((entry) => entry.data.section === section),
-}));
+const groups = groupIntegrations(entries);
 ---
 
 <Layout
@@ -34,24 +30,35 @@ const groups = (['local', 'remote', 'knowledge'] as const).map((section) => ({
 		<div class="grid-shell">
 			<aside class="sidebar">
 				<div class="kicker">Integration Nav</div>
-				<strong>Examples</strong>
-				<ul class="repo-list">
+				<strong>Collections</strong>
+				<div class="section-stack">
 					{
 						groups.map((group) => (
-							<>
-								<li class="nav-label">{group.label}</li>
-								{group.entries.map((entry) => (
-									<li>
-										<a href={integrationPath(entry)}>
-											<span class="repo-name">{entry.data.title}</span>
-											<span class="repo-meta">{entry.data.summary}</span>
-										</a>
-									</li>
+							<section class="nav-section-block">
+								<div class="nav-section-head">
+									<div class="nav-label">{group.label}</div>
+									<div class="nav-count">{group.count}</div>
+								</div>
+								<p class="nav-description">{group.description}</p>
+								{group.buckets.map((bucket) => (
+									<div class="nav-bucket">
+										<div class="nav-bucket-title">{bucket.label}</div>
+										<ul class="repo-list compact-list">
+											{bucket.entries.map((entry) => (
+												<li>
+													<a href={integrationPath(entry)}>
+														<span class="repo-name">{entry.data.title}</span>
+														<span class="repo-meta">{entry.data.summary}</span>
+													</a>
+												</li>
+											))}
+										</ul>
+									</div>
 								))}
-							</>
+							</section>
 						))
 					}
-				</ul>
+				</div>
 			</aside>
 
 			<main class="panel">
@@ -69,41 +76,52 @@ const groups = (['local', 'remote', 'knowledge'] as const).map((section) => ({
 					</div>
 					<div class="stat">
 						<strong>Local examples</strong>
-						<span>{groups.find((group) => group.section === 'local')?.entries.length ?? 0}</span>
+						<span>{groups.find((group) => group.id === 'local')?.count ?? 0}</span>
 					</div>
 					<div class="stat">
 						<strong>Remote examples</strong>
-						<span>{groups.find((group) => group.section === 'remote')?.entries.length ?? 0}</span>
+						<span>{groups.find((group) => group.id === 'remote')?.count ?? 0}</span>
 					</div>
 					<div class="stat">
 						<strong>Knowledge examples</strong>
-						<span>{groups.find((group) => group.section === 'knowledge')?.entries.length ?? 0}</span>
+						<span>{groups.find((group) => group.id === 'knowledge')?.count ?? 0}</span>
 					</div>
 				</div>
 
 				{
 					groups.map((group) => (
-						<section class="integration-section">
+						<section class="integration-section" id={group.id}>
 							<div class="section-heading">
 								<div class="kicker">{group.label}</div>
 								<h2>{group.label}</h2>
+								<p class="section-summary">{group.description}</p>
 							</div>
-							<div class="card-grid">
-								{group.entries.map((entry) => (
-									<article class="card">
-										<strong>{entry.data.title}</strong>
-										<p>{entry.data.summary}</p>
-										<div class="tag-list">
-											<span class="tag">{integrationLabel(entry.data.integration)}</span>
-											{entry.data.sourceLabel ? <span class="tag">{entry.data.sourceLabel}</span> : null}
+							{
+								group.buckets.map((bucket) => (
+									<section class="bucket-section">
+										<div class="bucket-heading">
+											<h3>{bucket.label}</h3>
+											<p>{bucket.description}</p>
 										</div>
-										<div class="cta-row">
-											<a class="button-link" href={integrationPath(entry)}>Open page</a>
-											{entry.data.sourceUrl ? <a class="button-link" href={entry.data.sourceUrl}>Source</a> : null}
+										<div class="card-grid">
+											{bucket.entries.map((entry) => (
+												<article class="card">
+													<strong>{entry.data.title}</strong>
+													<p>{entry.data.summary}</p>
+													<div class="tag-list">
+														<span class="tag">{integrationLabel(entry.data.integration)}</span>
+														{entry.data.sourceLabel ? <span class="tag">{entry.data.sourceLabel}</span> : null}
+													</div>
+													<div class="cta-row">
+														<a class="button-link" href={integrationPath(entry)}>Open page</a>
+														{entry.data.sourceUrl ? <a class="button-link" href={entry.data.sourceUrl}>Source</a> : null}
+													</div>
+												</article>
+											))}
 										</div>
-									</article>
-								))}
-							</div>
+									</section>
+								))
+							}
 						</section>
 					))
 				}
