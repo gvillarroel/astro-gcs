@@ -174,14 +174,17 @@ function buildSummary(text) {
 async function generateKnowledgeMarkdownExamples() {
 	const sources = [
 		{
-			dir: path.join(knowledgeRoot, 'T', 'confluence'),
+			dirs: [
+				path.join(knowledgeRoot, 'tmp', 'confluence'),
+				path.join(knowledgeRoot, 'T', 'confluence'),
+			],
 			pattern: '.md',
 			targetDir: 'confluence',
 			integration: 'confluence',
 			limit: 4,
 		},
 		{
-			dir: path.join(knowledgeRoot, 'tmp', 'jira'),
+			dirs: [path.join(knowledgeRoot, 'tmp', 'jira')],
 			pattern: '.md',
 			targetDir: 'jira',
 			integration: 'jira',
@@ -192,7 +195,20 @@ async function generateKnowledgeMarkdownExamples() {
 
 	for (const source of sources) {
 		try {
-			const files = await collectFiles(source.dir, source.pattern);
+			let files = [];
+			for (const dir of source.dirs) {
+				try {
+					files = await collectFiles(dir, source.pattern);
+				} catch {
+					files = [];
+				}
+				if (files.length > 0) {
+					break;
+				}
+			}
+			if (files.length === 0) {
+				continue;
+			}
 			const sorted = await Promise.all(
 				files.map(async (file) => ({
 					file,

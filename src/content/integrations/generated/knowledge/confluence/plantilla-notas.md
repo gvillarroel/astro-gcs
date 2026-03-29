@@ -5,8 +5,8 @@ section: "knowledge"
 integration: "confluence"
 sourceLabel: "CONFLUENCE"
 sourceUrl: "https://villarroelgj.atlassian.net/spaces/MMM/pages/688332/Plantilla+-+Notas"
-order: 3
-generatedAt: "2026-03-29T00:12:39.605Z"
+order: 1
+generatedAt: "2026-03-29T01:20:48.113Z"
 ---
 
 > Synced from the local `.knowledge` store and rendered by Astro during the static build.

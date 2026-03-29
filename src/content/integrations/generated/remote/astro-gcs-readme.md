@@ -6,7 +6,7 @@ integration: "github"
 sourceLabel: "gvillarroel/astro-gcs"
 sourceUrl: "https://github.com/gvillarroel/astro-gcs"
 order: 1
-generatedAt: "2026-03-29T00:12:39.563Z"
+generatedAt: "2026-03-29T01:20:48.073Z"
 ---
 
 > Remote Markdown fetched at Astro build time.
