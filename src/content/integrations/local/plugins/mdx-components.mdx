@@ -1,0 +1,29 @@
+---
+title: "MDX component embedding"
+summary: "Shows Astro components embedded inside content files through the official MDX integration."
+section: "local"
+integration: "mdx"
+sourceLabel: "@astrojs/mdx"
+order: 5
+---
+
+import TerminalCallout from '../../../../components/TerminalCallout.astro';
+
+# MDX component embedding
+
+MDX lets content authors mix Markdown with real Astro components.
+
+<TerminalCallout title="Shared component inside MDX" label="mdx">
+  This block is rendered by an Astro component imported directly into the content file.
+</TerminalCallout>
+
+## Practical uses
+
+- reusable callouts
+- visual API notes
+- embedded demos
+- richer documentation blocks without moving everything into `.astro`
+
+<TerminalCallout title="Why this fits this site" label="docs">
+  The navigation and page shell still come from Astro pages, while the content can opt into richer composition only when needed.
+</TerminalCallout>

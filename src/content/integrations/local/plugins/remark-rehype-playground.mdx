@@ -1,0 +1,39 @@
+---
+title: "Remark and rehype plugin playground"
+summary: "Shows generated table of contents, heading anchors, and external-link behavior from the shared Astro Markdown pipeline."
+section: "local"
+integration: "markdown"
+sourceLabel: "remark-toc / rehype-*"
+order: 4
+---
+
+# Plugin playground
+
+This page is driven by the shared Markdown pipeline in `astro.config.mjs`.
+
+## Contents
+
+## What is enabled
+
+- `remark-toc` inserts a table of contents under the `Contents` heading.
+- `rehype-slug` adds stable IDs to headings.
+- `rehype-autolink-headings` appends jump links to headings.
+- `rehype-external-links` marks external links and forces safe external-link attributes.
+
+## External links
+
+- [Astro docs](https://docs.astro.build/en/guides/markdown-content/)
+- [MDX integration](https://docs.astro.build/en/guides/integrations-guide/mdx/)
+- [Mermaid docs](https://mermaid.js.org/)
+
+## Heading anchors
+
+Hover or focus the heading area after the page loads. The `#` markers are injected by the rehype plugin, not written into the source Markdown.
+
+### Nested section
+
+This nested heading should also receive a slug and anchor link.
+
+## Why it matters
+
+These plugins are low-friction improvements for a static documentation site because they work across all Markdown entries without changing each page template.

@@ -1,0 +1,18 @@
+---
+interface Props {
+	title: string;
+	label?: string;
+}
+
+const { title, label = 'component' } = Astro.props;
+---
+
+<aside class="terminal-callout">
+	<div class="terminal-callout__meta">
+		<span>{label}</span>
+		<strong>{title}</strong>
+	</div>
+	<div class="terminal-callout__body">
+		<slot />
+	</div>
+</aside>

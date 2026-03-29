@@ -5,7 +5,7 @@ section: "knowledge"
 integration: "markdown"
 sourceLabel: ".knowledge store"
 order: 99
-generatedAt: "2026-03-29T00:03:35.585Z"
+generatedAt: "2026-03-29T00:07:50.833Z"
 ---
 
 # Build-time integration status

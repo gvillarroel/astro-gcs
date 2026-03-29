@@ -6,7 +6,7 @@ integration: "jira"
 sourceLabel: "JIRA"
 sourceUrl: "https://villarroelgj.atlassian.net/browse/KAN-3"
 order: 3
-generatedAt: "2026-03-29T00:03:35.572Z"
+generatedAt: "2026-03-29T00:07:50.821Z"
 ---
 
 > Synced from the local `.knowledge` store and rendered by Astro during the static build.

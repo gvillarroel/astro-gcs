@@ -4,7 +4,7 @@ export type IntegrationEntry = {
 		title: string;
 		summary?: string;
 		section: 'local' | 'remote' | 'knowledge';
-		integration: 'markdown' | 'mermaid' | 'github' | 'confluence' | 'jira' | 'aha';
+		integration: 'markdown' | 'mermaid' | 'github' | 'confluence' | 'jira' | 'aha' | 'mdx';
 		sourceLabel?: string;
 		sourceUrl?: string;
 		generatedAt?: string;
@@ -14,12 +14,15 @@ export type IntegrationEntry = {
 };
 
 export async function loadIntegrationEntries(): Promise<IntegrationEntry[]> {
-	const modules = import.meta.glob('../content/integrations/**/*.md');
+	const modules = {
+		...import.meta.glob('../content/integrations/**/*.md'),
+		...import.meta.glob('../content/integrations/**/*.mdx'),
+	};
 	const entries = await Promise.all(
 		Object.entries(modules).map(async ([file, loader]) => {
 			const module: any = await loader();
 			return {
-				id: file.replace('../content/integrations/', '').replace(/\.md$/, ''),
+				id: file.replace('../content/integrations/', '').replace(/\.(md|mdx)$/, ''),
 				data: module.frontmatter,
 				Content: module.default,
 			} satisfies IntegrationEntry;
@@ -58,6 +61,8 @@ export function integrationLabel(kind: IntegrationEntry['data']['integration']) 
 			return 'Jira';
 		case 'aha':
 			return 'Aha';
+		case 'mdx':
+			return 'MDX';
 	}
 }
 
