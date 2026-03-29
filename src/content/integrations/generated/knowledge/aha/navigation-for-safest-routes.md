@@ -6,7 +6,7 @@ integration: "aha"
 sourceLabel: "DEMO-11"
 sourceUrl: "https://macon.aha.io/features/DEMO-11"
 order: 2
-generatedAt: "2026-03-29T00:07:50.830Z"
+generatedAt: "2026-03-29T00:12:39.705Z"
 ---
 
 > Synced from the local `.knowledge` store and converted from Aha JSON into Markdown during the Astro build.
